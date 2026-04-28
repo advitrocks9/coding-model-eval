@@ -1,0 +1,12 @@
+.claude/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.cache/
+.DS_Store
+PLAN.md
+notes/
+results/
+*.local
