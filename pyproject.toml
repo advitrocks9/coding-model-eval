@@ -1,0 +1,24 @@
+[project]
+name = "coding-model-eval"
+version = "0.1.0"
+description = "Eval pipeline for Mellum-4b on HumanEval + HumanEval+, with multi-turn correction."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "datasets>=3.0",
+    "transformers>=4.46",
+    "accelerate>=1.0",
+    "torch>=2.11",
+    "tqdm>=4.66",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

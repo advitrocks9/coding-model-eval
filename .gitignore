@@ -8,5 +8,6 @@ venv/
 .DS_Store
 PLAN.md
 notes/
-results/
+writeup.md
+SUBMISSION.md
 *.local
