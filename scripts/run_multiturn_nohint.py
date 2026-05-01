@@ -1,14 +1,4 @@
-"""Ablation: same multi-turn loop, but no comment hint on retries.
-
-The point. My multi-turn run improved EvalPlus pass@1 by 1.2 pp on Mellum-SFT.
-That number contains two effects: (a) the model sees a hint and tries
-something different; (b) the retry uses temperature 0.6 sampling instead
-of greedy, so any retry would generate something different anyway. This
-script isolates (b). If recovery rate is similar without the hint, the
-hint isn't doing real work.
-
-usage: python scripts/run_multiturn_nohint.py [MODEL_PATH] [TAG]
-"""
+# usage: python scripts/run_multiturn_nohint.py [MODEL_PATH] [TAG]
 import json
 import sys
 import time

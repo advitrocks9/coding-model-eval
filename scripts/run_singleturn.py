@@ -1,11 +1,4 @@
-"""Single-turn HumanEval pass.
-
-Loads each task once, generates a completion, runs sandbox twice -- once
-under the original HumanEval test, once under the EvalPlus test. Saves
-results as JSON.
-
-usage: python scripts/run_singleturn.py [MODEL_PATH] [TAG]
-"""
+# usage: python scripts/run_singleturn.py [MODEL_PATH] [TAG]
 import json
 import sys
 import time

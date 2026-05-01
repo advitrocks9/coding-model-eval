@@ -1,4 +1,3 @@
-"""Print a few multi-turn retries to debug feedback efficacy."""
 import json
 import sys
 from pathlib import Path

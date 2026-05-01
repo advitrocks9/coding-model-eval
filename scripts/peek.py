@@ -1,4 +1,3 @@
-"""Quick stats on a multi-turn JSONL during a run."""
 import json
 import sys
 from pathlib import Path

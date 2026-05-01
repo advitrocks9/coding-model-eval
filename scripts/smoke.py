@@ -1,9 +1,3 @@
-"""Run 3 HumanEval problems through Mellum-4b-sft-python end-to-end.
-
-Goal: confirm the model loads on the 4090, the prompt/decode loop produces
-plausible Python, and the sandbox scores it correctly. Numbers don't matter
-yet, just that the pipe doesn't have a hole in it.
-"""
 import sys
 
 from eval.loaders import load_tasks

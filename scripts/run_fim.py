@@ -1,14 +1,4 @@
-"""FIM-mode HumanEval pass on Mellum-4b-base.
-
-Why this script exists. The same HumanEval prompt, evaluated as a chat-style
-continuation (what most leaderboards do for non-chat models) versus
-evaluated with Mellum's native FIM tokens, will give two different numbers.
-The model card itself reports FIM-style infilling pass@1 and skips
-HumanEval. So treating Mellum-base as a from-scratch generator is using it
-in the wrong shape; this is the apples-to-apples version.
-
-usage: python scripts/run_fim.py [MODEL_PATH] [TAG]
-"""
+# usage: python scripts/run_fim.py [MODEL_PATH] [TAG]
 import json
 import sys
 import time

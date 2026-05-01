@@ -1,9 +1,3 @@
-"""Load HumanEval and HumanEval+ tasks into a common shape.
-
-EvalPlus retains the original HumanEval prompt and entry_point, but rewrites
-the test suite. So a single completion can be scored under both. That's the
-point of the comparison.
-"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -14,18 +8,17 @@ from datasets import load_dataset
 
 @dataclass(slots=True)
 class Task:
-    task_id: str           # e.g. "HumanEval/0"
-    prompt: str            # the function signature + docstring
-    entry_point: str       # function name
-    test_base: str         # original HumanEval `test` field
-    test_plus: str         # EvalPlus' augmented `test` field
-    canonical: str         # reference solution, used for sanity checks
-    base_input_count: int  # how many inputs in the base test set
-    plus_extra_count: int  # how many extra inputs EvalPlus adds
+    task_id: str
+    prompt: str
+    entry_point: str
+    test_base: str
+    test_plus: str
+    canonical: str
+    base_input_count: int
+    plus_extra_count: int
 
 
 def load_tasks() -> list[Task]:
-    """Join openai/openai_humaneval and evalplus/humanevalplus on task_id."""
     base = {row["task_id"]: row for row in load_dataset("openai/openai_humaneval", split="test")}
     plus = {row["task_id"]: row for row in load_dataset("evalplus/humanevalplus", split="test")}
 
@@ -33,7 +26,6 @@ def load_tasks() -> list[Task]:
     tasks: list[Task] = []
     for tid in common:
         b, p = base[tid], plus[tid]
-        # heuristic counts so the writeup can quote how many extra tests EvalPlus added
         base_n = b["test"].count("assert ")
         plus_n = p["test"].count("assertion(") - base_n
         tasks.append(

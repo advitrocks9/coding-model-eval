@@ -1,4 +1,3 @@
-"""Verify multi_turn produces actually different completions across turns."""
 import sys
 
 from eval.loaders import load_tasks

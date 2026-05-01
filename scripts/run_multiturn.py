@@ -1,11 +1,4 @@
-"""Multi-turn pass on the same model.
-
-Reads results from the single-turn pass to find the tasks the model already
-passed (so we don't waste GPU cycles regenerating them) and the tasks it
-failed (which we retry).
-
-usage: python scripts/run_multiturn.py [MODEL_PATH] [TAG]
-"""
+# usage: python scripts/run_multiturn.py [MODEL_PATH] [TAG]
 import json
 import sys
 import time
@@ -47,7 +40,6 @@ def main() -> int:
     t0 = time.time()
     for t in tqdm(tasks):
         if single[t.task_id]["plus_pass"]:
-            # reuse single-turn pass; emit a 1-turn log to keep the file complete
             out.write(json.dumps({
                 "task_id": t.task_id,
                 "skipped_reason": "already_passed",
