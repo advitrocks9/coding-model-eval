@@ -1,14 +1,4 @@
-"""Sanity check: does the multi-turn loop ever HURT?
-
-For each task that the model passed under EvalPlus on the first attempt,
-fabricate a "previous attempt was wrong" hint anyway and ask the model to
-try again. Count how often the second attempt fails. If this number is
-high, then any apparent recovery on the multi-turn pass is suspect.
-
-Greedy decoding makes this informative: the same prompt always produces the
-same output, so any change in pass rate is attributable to the hint, not
-to sampling noise.
-"""
+# usage: python scripts/run_regression.py [MODEL_PATH] [TAG]
 import json
 import sys
 from pathlib import Path
@@ -59,8 +49,10 @@ def main() -> int:
         out.flush()
     out.close()
     n = len(passing)
+    if n == 0:
+        print("\nno passing tasks; nothing to regression-check")
+        return 0
     print(f"\nregression rate: {regressed}/{n} = {regressed/n:.1%}")
-    print("(higher means the 'try again' hint actively damages correct code)")
     return 0
 
 

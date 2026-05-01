@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import os
 import re
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, PreTrainedTokenizerFast
 
 _TRUNC_PATTERNS = (
     "\ndef ",
@@ -13,6 +14,29 @@ _TRUNC_PATTERNS = (
     "\nassert ",
     "\n#",
 )
+
+
+def _load_tokenizer(model_path: str):
+    # transformers 5.x picks the wrong pre_tokenizer for some BPE configs
+    # (DeepSeek-Coder ships a tokenizer.json that gets misread as sentencepiece).
+    # round-trip a sentinel; if it loses whitespace, load tokenizer.json raw.
+    tok = AutoTokenizer.from_pretrained(model_path)
+    sentinel = "def f(x):\n    return x"
+    if tok.decode(tok.encode(sentinel, add_special_tokens=False)) == sentinel:
+        return tok
+    json_path = os.path.join(model_path, "tokenizer.json")
+    if not os.path.isfile(json_path):
+        return tok
+    from tokenizers import Tokenizer
+    raw = Tokenizer.from_file(json_path)
+    fast = PreTrainedTokenizerFast(
+        tokenizer_object=raw,
+        bos_token=getattr(tok, "bos_token", None),
+        eos_token=getattr(tok, "eos_token", None),
+        pad_token=getattr(tok, "pad_token", None) or getattr(tok, "eos_token", None),
+        unk_token=getattr(tok, "unk_token", None),
+    )
+    return fast
 
 
 class Generator:
@@ -26,7 +50,7 @@ class Generator:
         self.model_path = model_path
         self.device = device
         self.max_new_tokens = max_new_tokens
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+        self.tokenizer = _load_tokenizer(model_path)
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path, dtype=dtype
         ).to(device).eval()
