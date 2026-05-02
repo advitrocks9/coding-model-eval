@@ -76,7 +76,9 @@ class Generator:
         return _truncate(text)
 
     def fim_complete(self, prefix: str, suffix: str = "\n", filename: str = "solution.py") -> str:
-        wrapped = f"<filename>{filename}\n<fim_suffix>{suffix}<fim_prefix>{prefix}<fim_middle>"
+        wrapped = self._fim_wrap(prefix, suffix, filename)
+        if wrapped is None:
+            raise RuntimeError(f"model {self.model_path} has no FIM tokens this code knows about")
         ids = self.tokenizer(wrapped, return_tensors="pt", return_token_type_ids=False).to(self.device)
         with torch.no_grad():
             out = self.model.generate(
@@ -87,12 +89,33 @@ class Generator:
             )
         gen = out[0, ids["input_ids"].shape[1]:]
         text = self.tokenizer.decode(gen, skip_special_tokens=False)
-        for marker in ("<filename>", "<fim_suffix>", "<fim_prefix>", "<|endoftext|>"):
+        for marker in self._fim_stop_markers():
             i = text.find(marker)
             if i >= 0:
                 text = text[:i]
                 break
         return _truncate(text)
+
+    def _fim_wrap(self, prefix: str, suffix: str, filename: str) -> str | None:
+        vocab = self.tokenizer.get_vocab()
+        # Mellum: <fim_prefix>/<fim_suffix>/<fim_middle> + optional <filename>
+        if "<fim_middle>" in vocab and "<fim_prefix>" in vocab:
+            head = f"<filename>{filename}\n" if "<filename>" in vocab else ""
+            return f"{head}<fim_suffix>{suffix}<fim_prefix>{prefix}<fim_middle>"
+        # DeepSeek-Coder: full-width pipes around fim▁begin/hole/end
+        ds_begin = "<｜fim▁begin｜>"
+        ds_hole = "<｜fim▁hole｜>"
+        ds_end = "<｜fim▁end｜>"
+        if ds_begin in vocab and ds_hole in vocab and ds_end in vocab:
+            return f"{ds_begin}{prefix}{ds_hole}{suffix}{ds_end}"
+        return None
+
+    def _fim_stop_markers(self) -> tuple[str, ...]:
+        return (
+            "<filename>", "<fim_suffix>", "<fim_prefix>", "<fim_middle>",
+            "<｜fim▁begin｜>", "<｜fim▁hole｜>", "<｜fim▁end｜>",
+            "<|endoftext|>", "<｜end▁of▁sentence｜>",
+        )
 
 
 def _truncate(text: str) -> str:
