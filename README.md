@@ -81,11 +81,15 @@ Five things worth noticing.
    | minimal | one line: `# Previous attempt was wrong. Try again.` | 5.1% [2.5, 10.1] |
    | **no hint** | resample only, no prompt change | **8.0% [4.5, 13.7]** |
 
-   Paired McNemar: post vs no-hint p=0.001 \*\*, current vs no-hint
-   p=0.012 \*. minimal/traceback vs no-hint not significant (p≈0.3).
-   So it isn't "hints don't work"; it's that long structured hints
-   that mimic code-comment blocks are significantly worse than no
-   hint, and one-line natural-language hints are about a wash.
+   Paired McNemar across the family of four format-vs-no-hint
+   contrasts, Holm-Bonferroni corrected: post p_holm=0.004 \*\*,
+   current p_holm=0.035 \*, minimal/traceback NS. So it isn't
+   "hints don't work"; it's that long structured hints that mimic
+   code-comment blocks are significantly worse than no hint after
+   correcting for multiple comparisons, and one-line
+   natural-language hints are about a wash. Estimand is conditional
+   recovery on the 138 single-turn failures, T=0.6 retries, paired
+   by task. Replicable from `scripts/analyze_hint_sweep.py`.
 4. **The retry hint also breaks correct solutions.** Take the 26
    tasks the model already passes, fabricate a "previous attempt was
    wrong" hint, regenerate. 8/26 = 30.8% break. Greedy decoding,
@@ -207,18 +211,31 @@ pre-training) closes the 2×2:
 | DS-Coder-base | 4.1% | 2.4% | hint costs 9.2 pp vs no-hint |
 | DS-Coder-instruct | **18.9%** | 4.4% | hint costs 3.7 pp vs no-hint |
 
-Three things this pins down:
+Three things this pins down. Cross-family regression-rate
+comparisons use Fisher's two-sided exact test on the 2×2 counts
+(rather than just CI overlap, since the exposure sets differ —
+each model's regression denominator is the tasks *that model*
+passes single-turn).
 
-- **Mellum's regression rate is uniquely high.** 27–31% across SFT
-  and DPO, vs 2–5% on both DeepSeek variants. The 95% CIs don't
-  overlap. The hint poisoning is a property of Mellum's training
-  distribution, not of model size or architecture.
+- **Mellum-{SFT, DPO} false-negative retry sensitivity is materially
+  higher than DeepSeek's, in this prompt and benchmark.** Mellum-SFT
+  (8/26) vs DS-base (1/41): p=0.002 \*\*. Mellum-SFT vs DS-instruct
+  (4/90): p<0.001 \*\*. Mellum-DPO (4/15) vs DS-base: p=0.015 \*.
+  Mellum-DPO vs DS-instruct: p=0.014 \*. Within each family the
+  rates are statistically indistinguishable (Mellum-SFT vs DPO
+  p=1.0; DS-base vs instruct p=1.0). The hint poisoning is
+  consistent across Mellum's two post-trainings and absent in both
+  of DeepSeek's; that's what the Fisher tests pin down. The
+  causal "Mellum's training distribution" reading is consistent
+  with the data but the experiment doesn't directly identify it —
+  see "What I'd do next" for the shared-task canonical-solution
+  assay that would.
 - **Recovery scales with capability, but the no-hint policy still
   wins for every model.** Going Mellum-SFT → DS-base → DS-instruct,
   hint-recovery rises 1.4% → 4.1% → 18.9%, but no-hint multi-turn
   beats with-hint multi-turn at the same retry budget for all four
   models. The hint *is* useful enough on DS-instruct that adding
-  it loses you only 3.7 pp vs no-hint, but it never wins.
+  it costs only 3.7 pp vs no-hint, but it never wins.
 - **The published "multi-turn pass@1" number conflates capability
   with hint-format compatibility.** A leaderboard that ranks models
   by multi-turn pass@1 with one hardcoded hint format will rank
@@ -252,6 +269,21 @@ retry trigger fires on correct outputs.
 The published multi-turn pass@1 number reports only the first of those
 three. That's the part of the framing this project is trying to make
 explicit.
+
+A specific caveat on the comparison between recovery (1.4%) and
+regression (30.8%): they aren't the same procedure, so they aren't
+the same axis. Recovery uses real failure feedback as the hint,
+sampled retries at T=0.6, up to two attempts, on the 138
+single-turn failures. Regression uses a static fabricated hint
+(`expected output X, got Y`), one greedy regenerate, on the 26
+already-passing tasks. Both are answering "what does this hint do
+to the model under deployment-shape conditions," but the recovery
+number is the model's best chance under realistic retry pressure,
+and the regression number is a conservative stress test under one
+fabricated trigger. The right next step is a no-hint retry
+control on the same 26 passing tasks, which would isolate
+hint-induced damage from damage caused by stochastic retrying
+itself — `scripts/run_regression_nohint.py` runs that.
 
 ## What's in here
 
