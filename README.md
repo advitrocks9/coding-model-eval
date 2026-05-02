@@ -295,21 +295,31 @@ eval/sandbox.py     subprocess + 10s timeout, returns pass/fail and a
 eval/loaders.py     joins openai/openai_humaneval and evalplus/humanevalplus
                     on task_id so one completion is scored under both
                     test suites
-eval/runner.py      AutoModel wrapper with completion + FIM-mode (using
-                    <fim_prefix>/<fim_suffix>/<fim_middle>), four hint
-                    formats for retry, and a tokenizer-bug fallback for
-                    DeepSeek-Coder under transformers 5.7
-eval/multi_turn.py  retry loop with use_hint flag and hint_format
-                    selector for the four-format sweep
-eval/report.py      cross-table with Wilson CIs + pass@k from
-                    correct_count using the unbiased Codex estimator
+eval/runner.py      AutoModel wrapper with completion + FIM-mode
+                    (model-aware: Mellum's <fim_prefix>/<fim_suffix>/
+                    <fim_middle> + filename, DeepSeek's full-width
+                    pipe variant), four retry-hint formats, and a
+                    tokenizer-bug fallback for DeepSeek-Coder under
+                    transformers 5.7
+eval/multi_turn.py  retry loop with use_hint + hint_format selector
+eval/loaders.py     joins openai_humaneval and evalplus/humanevalplus
+                    on task_id so one completion is scored under both
+eval/fim_loaders.py loads OpenAI HumanEval-Infilling (single-line,
+                    multi-line, random-span, light)
+eval/mbpp_loader.py MBPP+ via evalplus/mbppplus
+eval/report.py      cross-table with Wilson CIs + codex-style pass@k
 scripts/run_*.py    one runner per experiment, all take MODEL_PATH +
-                    TAG positional args
-scripts/analyze_hint_sweep.py   paired McNemar across hint formats
-scripts/calibrate_temperature.py    8-task slice to pick T for sampling
+                    TAG positional args (singleturn, multiturn,
+                    multiturn_nohint, regression, regression_nohint,
+                    canonical_poisoning, passk, fim, hint_sweep,
+                    humaneval_infilling, mbpp_singleturn)
+scripts/analyze_hint_sweep.py   paired McNemar + Holm-Bonferroni
+scripts/summary.py              one-command audit of every README claim
+scripts/calibrate_temperature.py 8-task slice for picking T
 scripts/taxonomy.py             classify final-turn outputs by mode
 scripts/make_plot.py            recovery vs regression scatter
-results/            JSONL per (tag, experiment), one row per task
+data/humaneval-infilling/       four FIM variants from openai/human-eval-infilling
+results/                        JSONL per (tag, experiment), one row per task
 ```
 
 About 1300 lines of Python excluding smoke / inspection helpers.
