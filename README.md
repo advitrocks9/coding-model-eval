@@ -218,18 +218,19 @@ each model's regression denominator is the tasks *that model*
 passes single-turn).
 
 - **Mellum-{SFT, DPO} false-negative retry sensitivity is materially
-  higher than DeepSeek's, in this prompt and benchmark.** Mellum-SFT
-  (8/26) vs DS-base (1/41): p=0.002 \*\*. Mellum-SFT vs DS-instruct
-  (4/90): p<0.001 \*\*. Mellum-DPO (4/15) vs DS-base: p=0.015 \*.
-  Mellum-DPO vs DS-instruct: p=0.014 \*. Within each family the
-  rates are statistically indistinguishable (Mellum-SFT vs DPO
-  p=1.0; DS-base vs instruct p=1.0). The hint poisoning is
-  consistent across Mellum's two post-trainings and absent in both
-  of DeepSeek's; that's what the Fisher tests pin down. The
-  causal "Mellum's training distribution" reading is consistent
-  with the data but the experiment doesn't directly identify it —
-  see "What I'd do next" for the shared-task canonical-solution
-  assay that would.
+  higher than DeepSeek's, in this prompt and benchmark.** Confirmatory
+  family is the four cross-family Mellum-vs-DeepSeek contrasts,
+  Holm-Bonferroni corrected: Mellum-SFT vs DS-instruct p_holm=0.003
+  \*\*, Mellum-SFT vs DS-base p_holm=0.005 \*\*, Mellum-DPO vs
+  DS-instruct p_holm=0.028 \*, Mellum-DPO vs DS-base p_holm=0.028 \*.
+  All four cross-family contrasts significant after correction.
+  Exploratory within-family rates are statistically indistinguishable
+  (Mellum-SFT vs DPO p=1.0; DS-base vs instruct p=1.0). The hint
+  poisoning is consistent across Mellum's two post-trainings and
+  absent in both of DeepSeek's. The causal "Mellum's training
+  distribution" reading is consistent with the data but the
+  experiment doesn't directly identify it — see "What I'd do next"
+  for the shared-task canonical-solution assay that would.
 - **Recovery scales with capability, but the no-hint policy still
   wins for every model.** Going Mellum-SFT → DS-base → DS-instruct,
   hint-recovery rises 1.4% → 4.1% → 18.9%, but no-hint multi-turn
