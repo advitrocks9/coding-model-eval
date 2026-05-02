@@ -47,7 +47,7 @@ def mcnemar(b: int, c: int) -> tuple[float, float]:
         from math import comb
         k = min(b, c)
         p = sum(comb(n, i) for i in range(k + 1)) / (2 ** n)
-        return float(b - c), min(1.0, 2 * p)
+        return float("nan"), min(1.0, 2 * p)
     chi2 = (abs(b - c) - 1) ** 2 / n
     # rough normal-approx p; correct enough for n we care about
     from math import erfc, sqrt
@@ -117,7 +117,7 @@ def main() -> None:
             f = label_b.split()[0]
             adj_p = adj_lookup[f]
             sig = "  **" if adj_p < 0.01 else ("  *" if adj_p < 0.05 else "")
-            print(f"  {label_b:<28} b={bb:3d} c={cc:3d}  chi2={chi2:.2f}  p={raw_p:.3f}  p_holm={adj_p:.3f}{sig}")
+            print(f"  {label_b:<28} b={bb:3d} c={cc:3d}  p={raw_p:.3f}  p_holm={adj_p:.3f}{sig}")
 
     print("\nExploratory pairwise (uncorrected; secondary):")
     for a, b in combinations(available, 2):
@@ -126,8 +126,8 @@ def main() -> None:
         da, db = available[a], available[b]
         bb = sum(1 for t in common if da[t] and not db[t])
         cc = sum(1 for t in common if not da[t] and db[t])
-        chi2, p = mcnemar(bb, cc)
-        print(f"  {a} vs {b}: b={bb}, c={cc}, chi2={chi2:.2f}, p={p:.3f}")
+        _, p = mcnemar(bb, cc)
+        print(f"  {a} vs {b}: b={bb}, c={cc}, p={p:.3f}")
 
 
 if __name__ == "__main__":
