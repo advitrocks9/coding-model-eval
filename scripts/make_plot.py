@@ -1,14 +1,3 @@
-"""Make the recovery-vs-regression scatter for the writeup.
-
-X axis: regression rate (% of correct solutions broken by a synthetic
-'try again' hint). Y axis: recovery rate (% of failed solutions recovered
-under the same hint format). One point per (model, hint_format).
-
-If a point is in the upper-left, the hint is helping. If lower-right,
-the hint is doing more harm than good. The Mellum-SFT and Mellum-DPO
-points with the short hint format both sit below the y=x diagonal,
-which is the finding the writeup turns on.
-"""
 import json
 from pathlib import Path
 
@@ -42,6 +31,7 @@ def main() -> None:
     for tag, label in [
         ("mellum_sft", "Mellum-4b-sft-python"),
         ("mellum_dpo", "Mellum-4b-dpo-python"),
+        ("ds_base", "DeepSeek-Coder-1.3B-base"),
     ]:
         mt = RESULTS / f"{tag}_multiturn.jsonl"
         reg = RESULTS / f"{tag}_regression.jsonl"
@@ -49,14 +39,12 @@ def main() -> None:
             continue
         rec, _, _ = recovery_rate(mt)
         regr, _, _ = regression_rate(reg)
-        points.append((label + " (short hint)", regr, rec))
+        points.append((label + " (current hint)", regr, rec))
 
     nohint_path = RESULTS / "mellum_sft_multiturn_nohint.jsonl"
     if nohint_path.exists():
         rec, _, _ = recovery_rate(nohint_path)
-        # no regression test for the no-hint case; placeholder x=0 since
-        # there's no hint to break correct solutions
-        points.append(("Mellum-SFT (no hint, sampled)", 0.0, rec))
+        points.append(("Mellum-SFT (no hint)", 0.0, rec))
 
     fig, ax = plt.subplots(figsize=(6.5, 5))
     xs = [p[1] for p in points]
