@@ -32,6 +32,7 @@ def main() -> None:
         ("mellum_sft", "Mellum-4b-sft-python"),
         ("mellum_dpo", "Mellum-4b-dpo-python"),
         ("ds_base", "DeepSeek-Coder-1.3B-base"),
+        ("ds_instruct", "DeepSeek-Coder-1.3B-instruct"),
     ]:
         mt = RESULTS / f"{tag}_multiturn.jsonl"
         reg = RESULTS / f"{tag}_regression.jsonl"

@@ -19,7 +19,7 @@ regression test that flips the framing on multi-turn.
 Pass@1 numbers; [low, high] are Wilson 95% CIs. n=164 for single-turn,
 138 for retries (the tasks the model fails on the first try). Regression
 n equals the number of tasks the model passes single-turn: 26 for
-Mellum-SFT, 15 for DPO, 41 for DeepSeek-base.
+Mellum-SFT, 15 for DPO, 41 for DeepSeek-base, 90 for DeepSeek-instruct.
 
 | tag | HumanEval | HumanEval+ | + retry (hint) | + retry (no hint) | regression |
 |---|---:|---:|---:|---:|---:|
@@ -128,11 +128,13 @@ The plot, briefly:
 
 Both with-hint Mellum points sit far below the y=x diagonal: their
 recovery is dwarfed by their regression rate. DeepSeek-Coder-base
-sits *above* the diagonal in the lower-left, recovering 4.1% at a
-2.4% regression cost. Mellum-SFT with no hint sits in the upper-left
+and DeepSeek-Coder-instruct sit *above* the diagonal in the
+lower-left, with DS-instruct the highest of any with-hint point at
+(4.4%, 18.9%). Mellum-SFT with no hint sits in the upper-left
 because there is no hint to break correct solutions. The relative
-positions are the comparison I'd put on a slide: "with the same hint,
-what's the trade you're getting?"
+positions are the comparison I'd put on a slide: "with the same
+hint, what's the trade you're getting?" — and the answer changes
+qualitatively across the four post-trainings.
 
 ## Why does the hint hurt
 
@@ -164,6 +166,7 @@ family, no instruction tuning):
 |---|---:|---:|---:|---:|---:|
 | Mellum-4b-sft-python | 15.9% | 17.1% | 22.6% | 1.4% [0.4, 5.1] | **30.8% [16.5, 50.0]** |
 | DeepSeek-Coder-1.3B-base | 25.0% | 28.0% | 37.2% | 4.1% [1.8, 9.3] | 2.4% [0.4, 12.6] |
+| DeepSeek-Coder-1.3B-instruct | 54.9% | 63.4% | 67.1% | 18.9% [11.6, 29.3] | 4.4% [1.7, 10.9] |
 
 Same hint format, same retry budget, same temperature. Three
 contrasts worth noticing:
@@ -192,10 +195,39 @@ reading is closer to: Mellum's SFT-on-Python corpus probably
 contains very few examples of comment blocks above functions that
 look like retry hints, so they're out-of-distribution and the model
 handles them by literal copying. DeepSeek's broader training mixes
-in enough such patterns that it treats them more like context. The
-hypothesis I'd test next, with more compute, is whether
-DeepSeek-Coder-1.3B-instruct (chat-tuned sister, same pre-training)
-shows recovery > 4.1% and regression < 2.4%.
+in enough such patterns that it treats them more like context.
+
+DeepSeek-Coder-1.3B-instruct (the chat-tuned sister, same
+pre-training) closes the 2×2:
+
+| | recovery (hint) | regression | net change at fixed budget |
+|---|---:|---:|---:|
+| Mellum-SFT | 1.4% | 30.8% | hint costs 5.5 pp vs no-hint |
+| Mellum-DPO | 0.7% | 26.7% | – |
+| DS-Coder-base | 4.1% | 2.4% | hint costs 9.2 pp vs no-hint |
+| DS-Coder-instruct | **18.9%** | 4.4% | hint costs 3.7 pp vs no-hint |
+
+Three things this pins down:
+
+- **Mellum's regression rate is uniquely high.** 27–31% across SFT
+  and DPO, vs 2–5% on both DeepSeek variants. The 95% CIs don't
+  overlap. The hint poisoning is a property of Mellum's training
+  distribution, not of model size or architecture.
+- **Recovery scales with capability, but the no-hint policy still
+  wins for every model.** Going Mellum-SFT → DS-base → DS-instruct,
+  hint-recovery rises 1.4% → 4.1% → 18.9%, but no-hint multi-turn
+  beats with-hint multi-turn at the same retry budget for all four
+  models. The hint *is* useful enough on DS-instruct that adding
+  it loses you only 3.7 pp vs no-hint, but it never wins.
+- **The published "multi-turn pass@1" number conflates capability
+  with hint-format compatibility.** A leaderboard that ranks models
+  by multi-turn pass@1 with one hardcoded hint format will rank
+  DS-instruct (63.4%) above DS-base (28.0%) above Mellum-SFT
+  (17.1%) — but the gap between Mellum-SFT and the rest is
+  partly that Mellum reads this hint as code-to-honor while the
+  others read it as instructions-to-follow. With a different hint
+  the ordering between the closely-spaced ones could swap, even
+  though capability didn't change.
 
 ## What "regression rate" actually measures
 
@@ -279,23 +311,29 @@ About 1300 lines of Python excluding smoke / inspection helpers.
 
 ## What I'd do next if I had another week
 
-- **DeepSeek-Coder-1.3B-instruct** (the chat-tuned sister of the base
-  model I already ran). Same pre-training, same parameter count,
-  different post-training. If recovery jumps from 4.1% to something
-  meaningfully higher, that confirms the hint-format effect is
-  upstream of model size and downstream of post-training. The base run
-  already pinned one corner of that 2×2.
 - **FIM-aware test mutation.** EvalPlus's mutation strategy doesn't
   transfer to FIM benchmarks. The right shape is to mutate the
   *surrounding file context* (rename variables, reorder imports, add
-  an unrelated function above), AST-level, and re-evaluate. That gives
-  a robustness number in the deployment-relevant direction.
-- **Hint format on stronger models.** The hint poisoning is most
-  visible on Mellum because Mellum's training distribution makes
-  these comment blocks unfamiliar. On a model that has seen retry
-  comments in pre-training, the format may flip from net-negative to
-  net-positive. Worth checking on Qwen2.5-Coder-Instruct and
-  StarCoder2-7B with the same five-format sweep, paired McNemar.
+  an unrelated function above), AST-level, and re-evaluate against
+  SAFIM or RepoBench. That gives a robustness number in the
+  deployment-relevant direction (which is what JetBrains actually
+  ships against, vs HumanEval).
+- **Five-format sweep on stronger models.** Mellum's hint poisoning
+  is most visible because Mellum's training distribution makes these
+  comment blocks unfamiliar. On the four models tested here the
+  no-hint policy wins, but the *gap* shrinks substantially with
+  capability (5.5 pp on Mellum, 3.7 pp on DS-instruct). Worth
+  running the same paired-McNemar five-format sweep on Qwen2.5-
+  Coder-Instruct and StarCoder2-7B to find out whether the gap
+  closes or flips signs at higher capability.
+- **Calibrate the regression-rate trigger.** Regression rate is
+  `P(correct → broken | retry triggered)`. The deployed cost is
+  that times `P(retry triggered | correct)`. The latter is
+  deployment-specific (an IDE that auto-retries on every TODO
+  comment is high; a human clicking "regenerate" is low). The
+  natural follow-up is to instrument a real IDE retry trigger
+  on a Mellum deployment and measure the conditional probability
+  in the wild.
 
 ## Reproducing
 
