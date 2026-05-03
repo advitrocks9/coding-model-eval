@@ -112,6 +112,16 @@ def run_canonical_poisoning(tag: str = "mellum_sft") -> dict:
     return _run("run_canonical_poisoning.py", tag)
 
 
+@app.function(image=image, gpu="A10G", timeout=10800, volumes={"/cache": hf_cache, "/repo/results": results_vol})
+def run_hint_sweep(tag: str = "mellum_sft") -> dict:
+    return _run("run_hint_sweep.py", tag)
+
+
+@app.function(image=image, gpu="A10G", timeout=7200, volumes={"/cache": hf_cache, "/repo/results": results_vol})
+def run_fim_recovery(tag: str = "mellum_sft", variant: str = "single") -> dict:
+    return _run("run_fim_recovery.py", tag, variant)
+
+
 @app.function(image=image, gpu="A10G", timeout=3600, volumes={"/cache": hf_cache, "/repo/results": results_vol})
 def run_regression_nohint(tag: str = "mellum_sft") -> dict:
     """Requires {tag}_singleturn.jsonl to exist in the volume already."""
