@@ -324,6 +324,7 @@ model's with-hint regression:
 |---|---:|---:|---:|
 | Mellum-SFT (n=26) | 30.8% | 26.9% | **+3.8 pp** |
 | Mellum-DPO (n=15) | 26.7% | 33.3% | -6.7 pp |
+| DS-Coder-base (n=41) | 2.4% | 22.0% | -19.6 pp |
 | DS-Coder-instruct (n=90) | 4.4% | 22.2% | -17.8 pp |
 
 So most of what looked like hint-induced damage is just stochastic
