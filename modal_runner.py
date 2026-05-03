@@ -97,7 +97,7 @@ def run_fim_light(tag: str = "mellum_base") -> dict:
     return _run("run_humaneval_infilling.py", tag, "light")
 
 
-@app.function(image=image, gpu="A10G", timeout=3600, volumes={"/cache": hf_cache, "/repo/results": results_vol})
+@app.function(image=image, gpu="A10G", timeout=10800, volumes={"/cache": hf_cache, "/repo/results": results_vol})
 def run_fim_single(tag: str = "mellum_base") -> dict:
     return _run("run_humaneval_infilling.py", tag, "single")
 

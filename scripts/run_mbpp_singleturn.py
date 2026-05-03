@@ -36,7 +36,10 @@ def main() -> int:
         completion = g.complete(t.prompt)
         full = t.prompt + completion
         rb = execute(full, t.test_base + f"\ncheck({t.entry_point})\n", timeout=10)
-        rp = execute(full, t.test_plus + f"\ncheck({t.entry_point})\n", timeout=20)
+        # MBPP+'s plus test self-executes at module load via a top-level
+        # `for i, (inp, exp) in enumerate(...): assertion(...)`. No check()
+        # entry function to call.
+        rp = execute(full, t.test_plus, timeout=20)
         base_pass += rb.passed
         plus_pass += rp.passed
         out.write(json.dumps({
