@@ -44,32 +44,37 @@ HumanEval-Infilling single-line benchmark (1033 tasks) and MBPP+
 |---|---:|---:|---:|
 | Mellum-4b-base | 21.3% | 76.9% [74.2, 79.3] | – |
 | Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] | **1.3% [0.6, 3.1]** |
-| Mellum-4b-dpo-python | 9.1% | **81.9% [79.4, 84.1]** | – |
-| DS-Coder-1.3B-base | 25.0% | 16.3% [13.5, 19.6] (n=565) | 22.0% [18.1, 26.4] |
-| DS-Coder-1.3B-instruct | 54.9% | 8.9% [6.5, 12.1] (n=404) | 52.6% [47.6, 57.6] |
+| Mellum-4b-dpo-python | 9.1% | 81.9% [79.4, 84.1] | – |
+| DS-Coder-1.3B-base | 25.0% | 13.0% [11.0, 15.2] | 22.0% [18.1, 26.4] |
+| DS-Coder-1.3B-instruct | 54.9% | 3.7% [2.7, 5.0] | 52.6% [47.6, 57.6] |
 
 Three things this 3-benchmark grid pins down. (1) Same Mellum-DPO,
 9.1% on HumanEval+ vs 81.9% on HumanEval-Infilling, **9× difference**
 on the *same model* — the benchmark choice is doing more work than
-the model choice. The Mellum paper reports 80.45% on HumanEval-
-Infilling for Mellum-base; my pipeline lands at 76.9% (small gap
-from prompt-format details). (2) Each post-training stage hurts
-HumanEval (24.4 → 18.3 → 11.0) and helps FIM (76.9 → 80.8 →
-81.9): same training axis, two benchmarks, *opposite signs*.
-(3) Mellum-SFT scores **1.3% on MBPP+** — basically zero — because
-MBPP+'s prompt format is "docstring at the top of an empty file,
-write the function below," which is out of distribution for a
-FIM-on-Python model. Drop the same task into a partially-completed
-file with `<fim_prefix>`/`<fim_suffix>` tokens and the model scores
-80%+. The format is doing all the work. (DS-Coder, trained on more
-diverse data, handles all three benchmark formats.)
+the model choice. (2) The post-training direction reversal is
+strongest at the base→SFT step. Paired McNemar on the 1033 FIM
+tasks: base→SFT p=0.001 \*\*, base→DPO p<0.001 \*\*, but **SFT→DPO
+p=0.25 (NS)** — the additional FIM gain from DPO over SFT is
+suggestive, not significant at this n. The HumanEval direction
+(each stage hurts) is consistent across all comparisons. So the
+defensible version of "opposite signs" is base vs post-trained,
+not stage-by-stage. (3) Mellum-SFT scores **1.3% on MBPP+** —
+basically zero — because MBPP+'s prompt format (docstring at the
+top of an empty file) is out of distribution for a FIM-on-Python
+model. Drop the same task into a partially-completed file with
+`<fim_prefix>`/`<fim_suffix>` tokens and the model scores 80%+.
+The format is doing all the work. *Caveat:* my MBPP+ prompt is a
+minimal docstring scaffold; a paper-matched prompt could give a
+higher number, so 1.3% is an upper-bound argument for "format-OOD"
+not a tight measurement. (DS-Coder, trained on more diverse
+data, handles all three benchmark formats.)
 
-DS FIM-Infilling numbers are partial (565 / 404 of 1033) because the
-first dispatch hit a 1hr Modal timeout; the partials are unbiased
-samples from the dataset and the qualitative picture (DS is much
-weaker on FIM than Mellum, since DS isn't trained as aggressively
-for the format) is solid. Re-running with a longer timeout in
-parallel.
+The Mellum-base FIM number, 76.9%, is 3.5 pp under the JetBrains
+paper's published 80.45%. I haven't done a paper-matched prompt
+ablation; the within-pipeline orderings are still internally
+consistent (the Mellum FIM scores all fall in a tight band) but a
+3.5 pp absolute miss against the only external anchor is real and
+worth noting.
 
 
 CIs matter for recovery: with-hint recovery on Mellum-SFT is 1.4%
@@ -337,7 +342,7 @@ model's with-hint regression:
 
 | | with current hint | no-hint control | hint marginal |
 |---|---:|---:|---:|
-| Mellum-SFT (n=26) | 30.8% | 26.9% | **+3.8 pp** |
+| Mellum-SFT (n=26) | 30.8% | 26.9% | +3.8 pp |
 | Mellum-DPO (n=15) | 26.7% | 33.3% | -6.7 pp |
 | DS-Coder-base (n=41) | 2.4% | 22.0% | -19.6 pp |
 | DS-Coder-instruct (n=90) | 4.4% | 22.2% | -17.8 pp |
@@ -345,12 +350,29 @@ model's with-hint regression:
 So most of what looked like hint-induced damage is just stochastic
 retry damage on a from-scratch problem (sampled retry breaks
 22-33% of correct answers in three of four models even with no
-hint). The hint's *marginal* effect, after subtracting the
-stochastic baseline, is +3.8 pp on Mellum-SFT (the only positive
-sign) and stabilising on the other models. So the hint is not
-generically poisonous; it's specifically poisonous to Mellum-SFT,
-and on every other model it actually anchors sampled retries.
-That's a sharper version of the cross-family claim.
+hint). The strongest defensible reading: on the two DeepSeek
+models the hint reduces sampled-retry breakage substantially; on
+Mellum-SFT it doesn't. The "stabilising" effect on DeepSeek has
+an alternative mechanism — the verbose hint injects the prior
+correct completion back into the prompt, so the model may be
+copying a correct program it is directly shown rather than
+exhibiting general robustness — and the within-Mellum sign
+difference (+3.8 vs -6.7 pp) rests on n=15 and n=26 where the
+discordant-task counts are 5 vs 4 and 3 vs 4 respectively, so
+the per-Mellum sign isn't statistically meaningful. Two
+confounds I haven't fully addressed: (a) the with-hint regression
+uses greedy decoding while the no-hint control uses T=0.6
+sampled, so this comparison still confounds prompt content with
+decoding mode; (b) the canonical-poisoning experiment below
+shows DeepSeek-base lifts +32 pp from seeing the canonical, so
+"hint as anchor" is the more conservative reading than "hint
+stabilises sampled retries."
+
+A cleaner settling experiment: full 2×2 of {hint, no-hint} ×
+{greedy, T=0.6} on the same passing tasks, plus a fifth arm with
+the failure framing but the prior code stripped. That separates
+"anchor from prior completion" from "anchor from failure framing."
+Not run here.
 
 ### Canonical-solution poisoning: shared-task assay
 
@@ -369,14 +391,24 @@ all 164 tasks. Pass-after vs natural single-turn pass@1:
 | DS-Coder-instruct | 54.9% | 72.6% | +17.7 pp |
 | DS-Coder-base | 25.0% | 57.3% | **+32.3 pp** |
 
-DS-base imitates the demonstration most aggressively — given a
-correct solution above the prompt and the "wrong, try again"
-flag, it just emits something close to the canonical 57% of the
-time, more than doubling its single-turn pass rate. Mellum-DPO
-resists the most: only +3.7 pp lift. Reading: DPO has steered
-Mellum-DPO away from raw imitation more than SFT did. (Same axis
-as the regression-rate finding — DPO is slightly less hint-sensitive
-than SFT — but in the opposite direction here.)
+DS-base shows the largest lift: 25 → 57 = +32 pp pass rate
+when given the canonical solution above the prompt and the
+"wrong, try again" flag. Mellum-DPO shows the smallest: 9 → 13 =
++3.7 pp. The pattern is consistent with three different mechanisms
+that this experiment can't disentangle from pass/fail alone:
+(a) imitation propensity (the model copies the canonical it just
+saw); (b) correctness recognition (the model looks at the canonical,
+recognises it as right, ignores the wrong-flag); (c) differential
+capacity (DS-base has more headroom, larger absolute swings
+expected from any kind of context shift). The lift table is real
+but the "DPO steered Mellum away from imitation" reading is one
+hypothesis among three, not a measurement.
+
+A cleaner settling experiment would store completions and compute
+exact-match / AST-similarity rate to the provided canonical, and
+add control arms with (a) an incorrect canonical-like distractor,
+(b) a natural-language description with no code, (c) a
+variable-renamed paraphrase of the canonical. Not run here.
 
 ## What's in here
 
