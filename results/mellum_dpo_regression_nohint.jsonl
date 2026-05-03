@@ -1,0 +1,15 @@
+{"task_id": "HumanEval/16", "still_passes": false, "kind_after": "syntax", "msg_after": "SyntaxError: invalid syntax. Perhaps you forgot a comma?"}
+{"task_id": "HumanEval/23", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/27", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/28", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/29", "still_passes": false, "kind_after": "syntax", "msg_after": "SyntaxError: '(' was never closed"}
+{"task_id": "HumanEval/30", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
+{"task_id": "HumanEval/34", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/35", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/42", "still_passes": false, "kind_after": "syntax", "msg_after": "SyntaxError: '[' was never closed"}
+{"task_id": "HumanEval/45", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/48", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/52", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/53", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/58", "still_passes": false, "kind_after": "syntax", "msg_after": "IndentationError: unindent does not match any outer indentation level"}
+{"task_id": "HumanEval/60", "still_passes": true, "kind_after": "ok", "msg_after": ""}
