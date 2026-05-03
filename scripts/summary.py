@@ -144,12 +144,74 @@ def regression_cross_family() -> str:
     return "\n".join(out)
 
 
+def benchmark_grid() -> str:
+    out = ["", "## 3-benchmark grid (HumanEval+ / HumanEval-Infilling / MBPP+)"]
+    out.append(f"  {'tag':<16}{'plus':>14}{'fim':>16}{'mbpp+':>16}")
+    for tag in ("mellum_base", "mellum_sft", "mellum_dpo", "ds_base", "ds_instruct"):
+        plus = "-"
+        s = RESULTS / f"{tag}_singleturn.jsonl"
+        if s.exists():
+            rows = [json.loads(l) for l in s.open()]
+            k = sum(1 for r in rows if r["plus_pass"])
+            plus = f"{k/len(rows):.1%}"
+        f = "-"
+        fp = RESULTS / f"{tag}_he_infill_single.jsonl"
+        if fp.exists():
+            rows = [json.loads(l) for l in fp.open()]
+            k = sum(1 for r in rows if r["passed"])
+            note = "" if len(rows) == 1033 else f" (n={len(rows)})"
+            f = f"{k/len(rows):.1%}{note}"
+        m = "-"
+        mp = RESULTS / f"{tag}_mbpp_singleturn.jsonl"
+        if mp.exists():
+            rows = [json.loads(l) for l in mp.open()]
+            k = sum(1 for r in rows if r["plus_pass"])
+            m = f"{k/len(rows):.1%}"
+        out.append(f"  {tag:<16}{plus:>14}{f:>16}{m:>16}")
+    return "\n".join(out)
+
+
+def canonical_poisoning_report() -> str:
+    natural_pct = {"mellum_sft": 0.159, "mellum_dpo": 0.091, "ds_base": 0.250, "ds_instruct": 0.549}
+    out = ["", "## Canonical-solution poisoning (164 tasks, shared task set)"]
+    out.append(f"  {'tag':<16}{'natural':>10}{'with-canonical':>18}{'lift':>10}")
+    for tag in ("mellum_dpo", "mellum_sft", "ds_instruct", "ds_base"):
+        cp = RESULTS / f"{tag}_canonical_poisoning.jsonl"
+        if not cp.exists():
+            continue
+        rows = [json.loads(l) for l in cp.open()]
+        passes = sum(1 for r in rows if r["still_passes"])
+        pp = passes / len(rows)
+        nat = natural_pct[tag]
+        out.append(f"  {tag:<16}{nat:>10.1%}{pp:>18.1%}{(pp-nat)*100:>+9.1f} pp")
+    return "\n".join(out)
+
+
+def regression_with_control() -> str:
+    out = ["", "## Regression rate: with current hint vs no-hint sampled control"]
+    out.append(f"  {'tag':<16}{'with-hint':>16}{'no-hint control':>20}{'hint marginal':>18}")
+    for tag in ("mellum_sft", "mellum_dpo", "ds_base", "ds_instruct"):
+        h = RESULTS / f"{tag}_regression.jsonl"
+        n = RESULTS / f"{tag}_regression_nohint.jsonl"
+        if not (h.exists() and n.exists()):
+            continue
+        hr = [json.loads(l) for l in h.open()]
+        nr = [json.loads(l) for l in n.open()]
+        hb = sum(1 for r in hr if not r["still_passes"]) / len(hr)
+        nb = sum(1 for r in nr if not r["still_passes"]) / len(nr)
+        out.append(f"  {tag:<16}{hb:>16.1%}{nb:>20.1%}{(hb-nb)*100:>+15.1f} pp")
+    return "\n".join(out)
+
+
 def main() -> None:
     print("# coding-model-eval summary\n")
     print("## Cross-table")
     print(cross_table())
+    print(benchmark_grid())
     print(hint_sweep_report("mellum_sft"))
     print(regression_cross_family())
+    print(regression_with_control())
+    print(canonical_poisoning_report())
 
 
 if __name__ == "__main__":

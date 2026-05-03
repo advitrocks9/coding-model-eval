@@ -38,6 +38,8 @@ def all_tags() -> list[str]:
     seen: set[str] = set()
     for p in sorted(RESULTS.glob("*_singleturn.jsonl")):
         t = p.stem.removesuffix("_singleturn")
+        if t.endswith("_mbpp"):
+            continue  # belongs in the benchmark grid, not the cross-table
         if t not in seen:
             tags.append(t)
             seen.add(t)
