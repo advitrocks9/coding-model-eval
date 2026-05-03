@@ -27,13 +27,27 @@ def main() -> int:
     print(f"model: {model_path}\ntag: {tag}\nout: {out_path}", flush=True)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
+    done_ids: set[str] = set()
+    passed = 0
+    if out_path.exists():
+        for line in out_path.open():
+            if not line.strip():
+                continue
+            r = json.loads(line)
+            done_ids.add(r["task_id"])
+            if r.get("passed"):
+                passed += 1
+        if done_ids:
+            print(f"resuming: {len(done_ids)} tasks already done, {passed} passed", flush=True)
+
     g = Generator(model_path)
     print("model loaded", flush=True)
 
-    out = out_path.open("w")
-    passed = 0
+    out = out_path.open("a")
     t0 = time.time()
     for t in tqdm(tasks):
+        if t.task_id in done_ids:
+            continue
         completion = g.fim_complete(t.prompt, suffix=t.suffix, filename=f"{t.entry_point}.py")
         full = t.prompt + completion + t.suffix
         r = execute(full, t.test + f"\ncheck({t.entry_point})\n", timeout=20)
