@@ -24,8 +24,22 @@ def _load_tokenizer(model_path: str):
     sentinel = "def f(x):\n    return x"
     if tok.decode(tok.encode(sentinel, add_special_tokens=False)) == sentinel:
         return tok
-    json_path = os.path.join(model_path, "tokenizer.json")
-    if not os.path.isfile(json_path):
+    json_path = None
+    if os.path.isdir(model_path):
+        cand = os.path.join(model_path, "tokenizer.json")
+        if os.path.isfile(cand):
+            json_path = cand
+    else:
+        # HF identifier; resolve to local snapshot
+        try:
+            from huggingface_hub import snapshot_download
+            local = snapshot_download(model_path)
+            cand = os.path.join(local, "tokenizer.json")
+            if os.path.isfile(cand):
+                json_path = cand
+        except Exception:
+            pass
+    if json_path is None:
         return tok
     from tokenizers import Tokenizer
     raw = Tokenizer.from_file(json_path)

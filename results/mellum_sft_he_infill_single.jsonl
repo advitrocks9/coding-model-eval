@@ -1,0 +1,1033 @@
+{"task_id": "SingleLineInfilling/HumanEval/0/L0", "completion": "    for idx, elem in enumerate(numbers):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L1", "completion": "        for idx2, elem2 in enumerate(numbers):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L2", "completion": "            if idx != idx2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L3", "completion": "                distance = abs(elem - elem2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L4", "completion": "                if distance < threshold:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L5", "completion": "                    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/0/L7", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1.0, 2.0, 3.9, 4.0, 5.0, 2.2], 0.05) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/1/L0", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L1", "completion": "    current_string = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L2", "completion": "    current_depth = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L4", "completion": "    for c in paren_string:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L5", "completion": "        if c == '(':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L6", "completion": "            current_depth += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L7", "completion": "            current_string.append(c)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L8", "completion": "        elif c == ')':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L9", "completion": "            current_depth -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L10", "completion": "            current_string.append(c)\n        else:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('(()()) ((())) () ((())()())') == ["}
+{"task_id": "SingleLineInfilling/HumanEval/1/L12", "completion": "        if current_depth == 0:\n            if current_string:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L13", "completion": "                result.append(''.join(current_string))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L14", "completion": "                current_string = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/1/L16", "completion": "    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/2/L0", "completion": "#     if number < 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3.5) == 0.5"}
+{"task_id": "SingleLineInfilling/HumanEval/3/L0", "completion": "    balance = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/3/L2", "completion": "    for op in operations:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/3/L3", "completion": "        if op == 1:\n            balance += 1\n        elif op == 2:\n            balance -= 1\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 2, -4, 5, 6]) == True"}
+{"task_id": "SingleLineInfilling/HumanEval/3/L4", "completion": "        if balance < 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/3/L5", "completion": "            return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/3/L7", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate([]) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/4/L0", "completion": "    mean = sum(numbers) / len(numbers)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/4/L1", "completion": "    return sum(abs(x - mean) for x in numbers) / len(numbers)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L0", "completion": "    if not numbers:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L1", "completion": "        return []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L3", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L5", "completion": "    for n in numbers[:-1]:\n        result.append(n)\n        result.append(delimeter)\n        result.append(numbers[n])\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/5/L6", "completion": "        result.append(n)\n        result.append(delimeter)\n        result.append(n)\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5, 6, 3, 2], 8) == [5, 8, 6, 8, 3, 8, 2]"}
+{"task_id": "SingleLineInfilling/HumanEval/5/L7", "completion": "        result.append(delimeter)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L9", "completion": "    result.append(numbers[-1])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/5/L11", "completion": "    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L0", "completion": "    def parse_paren_group(s: str) -> int:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L1", "completion": "        depth = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L2", "completion": "        max_depth = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L3", "completion": "        for c in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L4", "completion": "            if c == '(':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L5", "completion": "                depth += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L6", "completion": "                max_depth = max(max_depth, depth)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L7", "completion": "            elif c == ')':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L8", "completion": "                depth -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L10", "completion": "        return max_depth\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/6/L12", "completion": "    return [parse_paren_group(s) for s in paren_string.split()]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/7/L0", "completion": "    return [s for s in strings if substring in s]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L0", "completion": "    sum_value = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L1", "completion": "    prod_value = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L3", "completion": "    for n in numbers:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L4", "completion": "        sum_value += n\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L5", "completion": "        prod_value *= n\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/8/L6", "completion": "\n    return sum_value, prod_value\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L0", "completion": "    running_max = None\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L1", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L3", "completion": "    for n in numbers:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L4", "completion": "        if running_max is None:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L5", "completion": "            running_max = n\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L6", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L7", "completion": "            running_max = max(n, running_max)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L9", "completion": "        result.append(running_max)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/9/L11", "completion": "    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/10/L0", "completion": "    if not string:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/10/L1", "completion": "        return string\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/10/L3", "completion": "    beginning_of_suffix = 0\n    while not is_palindrome(string[:beginning_of_suffix]):\n        beginning_of_suffix += 1\n\n    beginning_of_prefix = beginning_of_suffix - 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/10/L5", "completion": "    for i in range(len(string) - 1, -1, -1):\n        if is_palindrome(string[i:]):\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 26"}
+{"task_id": "SingleLineInfilling/HumanEval/10/L6", "completion": "        beginning_of_suffix += 1\n\n    # string[:beginning_of_suffix] is the prefix of the palindrome\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/10/L8", "completion": "    return string[:beginning_of_suffix] + string[::-1][beginning_of_suffix:]\n", "passed": false, "kind": "assertion", "msg": "assert candidate('xyz') == 'xyzyx'"}
+{"task_id": "SingleLineInfilling/HumanEval/11/L0", "completion": "    def xor(i: str, j: str) -> str:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/11/L1", "completion": "        if i == j:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/11/L2", "completion": "            return '0'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/11/L3", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/11/L4", "completion": "            return '1'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/11/L6", "completion": "def string_xor_brute_force(a: str, b: str) -> str:\n    \"\"\" Input are two strings a and b consisting only of 1s and 0s.\n    Perform binary XOR on these inputs and return result also as a string.\n    >>> string_xor_brute_force('010', '110')\n    '100'\n    \"\"\"\n    return ''.join([str(int(a[i]) ^ int(b[i])) for i in range(len(a))])\n", "passed": false, "kind": "assertion", "msg": "assert candidate('111000', '101010') == '010010'"}
+{"task_id": "SingleLineInfilling/HumanEval/12/L0", "completion": "    if not strings:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/12/L1", "completion": "        return None\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/12/L3", "completion": "    maxlen = max(len(s) for s in strings)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/12/L4", "completion": "    for s in strings:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/12/L5", "completion": "        if len(s) == maxlen:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/12/L6", "completion": "            return s\n\n    return None\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/13/L0", "completion": "    while b != 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/13/L1", "completion": "        a, b = b, a % b\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/13/L2", "completion": "    return a\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/14/L0", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/14/L2", "completion": "    for i in range(len(string)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/14/L3", "completion": "        result.append(string[:i + 1])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/14/L4", "completion": "\n    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/15/L0", "completion": "def main():\n    print(string_sequence(0))\n    print(string_sequence(5))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(0) == '0'"}
+{"task_id": "SingleLineInfilling/HumanEval/16/L0", "completion": "if __name__ == '__main__':\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate('') == 0"}
+{"task_id": "SingleLineInfilling/HumanEval/17/L0", "completion": "    note_map = {'o': 4, 'o|': 2, '.|': 1}\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/17/L1", "completion": "    return [note_map[note] for note in music_string.split()]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/18/L0", "completion": "    times = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/18/L2", "completion": "    for i in range(len(string)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/18/L3", "completion": "        if string[i:i + len(substring)] == substring:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/18/L4", "completion": "            times += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/18/L6", "completion": "    return times\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L0", "completion": "    value_map = {\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L1", "completion": "        'zero': 0,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L2", "completion": "        'one': 1,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L3", "completion": "        'two': 2,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L4", "completion": "        'three': 3,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L5", "completion": "        'four': 4,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L6", "completion": "        'five': 5,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L7", "completion": "        'six': 6,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L8", "completion": "        'seven': 7,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L9", "completion": "        'eight': 8,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L10", "completion": "        'nine': 9\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L11", "completion": "    }\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/19/L12", "completion": "#     return ' '.join(sorted(numbers.split(), key=value_map.get))\n    return ' '.join(sorted(numbers.split(), key=value_map.get, reverse=True))\n", "passed": false, "kind": "assertion", "msg": "assert candidate('three five nine') == 'three five nine'"}
+{"task_id": "SingleLineInfilling/HumanEval/20/L0", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L1", "completion": "    distance = None\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L3", "completion": "    for idx, elem in enumerate(numbers):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L4", "completion": "        for idx2, elem2 in enumerate(numbers):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L5", "completion": "            if idx != idx2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L6", "completion": "                if distance is None:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L7", "completion": "                    distance = abs(elem - elem2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L8", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L9", "completion": "                else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L10", "completion": "                    new_distance = abs(elem - elem2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L11", "completion": "                    if new_distance < distance:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L12", "completion": "                        distance = new_distance\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L13", "completion": "                        closest_pair = tuple(sorted([elem, elem2]))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/20/L15", "completion": "    return closest_pair\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/21/L0", "completion": "    min_number = min(numbers)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/21/L1", "completion": "    max_number = max(numbers)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/21/L2", "completion": "    return [(number - min_number) / (max_number - min_number) for number in numbers]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/22/L0", "completion": "    return [value for value in values if isinstance(value, int)]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/23/L0", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate('') == 0"}
+{"task_id": "SingleLineInfilling/HumanEval/24/L0", "completion": "    for i in range(n, 0, -1):\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/24/L1", "completion": "        if n % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/24/L2", "completion": "            return i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L0", "completion": "    import math\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L1", "completion": "    fact = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L2", "completion": "    i = 2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L3", "completion": "    while i <= math.sqrt(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L4", "completion": "        if n % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L5", "completion": "            fact.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L6", "completion": "            n = n // i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L7", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L8", "completion": "            i += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L10", "completion": "    if n > 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L11", "completion": "        fact.append(n)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/25/L12", "completion": "    return fact\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/26/L0", "completion": "\n", "passed": false, "kind": "exception", "msg": "NameError: name 'collections' is not defined. Did you forget to import 'collections'?"}
+{"task_id": "SingleLineInfilling/HumanEval/26/L1", "completion": "\n    c = collections.Counter(numbers)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/26/L2", "completion": "    return [x for x, _ in c.items() if c[x] > 1]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 2, 3, 4]) == [1, 2, 3, 4]"}
+{"task_id": "SingleLineInfilling/HumanEval/27/L0", "completion": "    return string.swapcase()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/28/L0", "completion": "    return ''.join(strings)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/29/L0", "completion": "    return [s for s in strings if s.startswith(prefix)]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/30/L0", "completion": "    return [x for x in l if x > 0]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L0", "completion": "    if n < 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L1", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L2", "completion": "    for k in range(2, n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L3", "completion": "        if n % k == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L4", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/31/L5", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L0", "completion": "    if len(xs) % 2 == 0:\n        raise ValueError(\"xs must have odd number of coefficients\")\n    begin = 0.0\n    end = 1.0\n", "passed": false, "kind": "exception", "msg": "ValueError: xs must have odd number of coefficients"}
+{"task_id": "SingleLineInfilling/HumanEval/32/L1", "completion": "    while len(xs) % 2 == 0:\n", "passed": false, "kind": "timeout", "msg": "timed out after 20s"}
+{"task_id": "SingleLineInfilling/HumanEval/32/L2", "completion": "        begin *= 2.0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L3", "completion": "        end *= 2.0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L4", "completion": "\n", "passed": false, "kind": "timeout", "msg": "timed out after 20s"}
+{"task_id": "SingleLineInfilling/HumanEval/32/L5", "completion": "        center = (begin + end) / 2.0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L6", "completion": "        if poly(xs, center) == 0:\n", "passed": false, "kind": "assertion", "msg": "assert math.fabs(poly(coeffs, solution)) < 1e-4"}
+{"task_id": "SingleLineInfilling/HumanEval/32/L7", "completion": "            begin = center\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L8", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L9", "completion": "            end = center\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/32/L10", "completion": "    return center\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/33/L0", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/33/L1", "completion": "    for i in range(len(l)):\n        if i % 3 == 0:\n            l[i], l[i+1] = l[i+1], l[i]\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/33/L2", "completion": "    return l\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/34/L0", "completion": "    return sorted(set(l))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/35/L0", "completion": "    m = l[0]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/35/L1", "completion": "    for e in l:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/35/L2", "completion": "        if e > m:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/35/L3", "completion": "            m = e\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/35/L4", "completion": "    return m\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L0", "completion": "    ns = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L1", "completion": "    for i in range(1, n + 1):\n", "passed": false, "kind": "assertion", "msg": "assert candidate(78) == 2"}
+{"task_id": "SingleLineInfilling/HumanEval/36/L2", "completion": "        if i % 11 == 0 or i % 13 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L3", "completion": "            ns.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L4", "completion": "    s = ''.join(map(str, ns))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L5", "completion": "    ans = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L6", "completion": "    for c in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L7", "completion": "        if c == '7':\n            ans += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/36/L8", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L0", "completion": "    evens = l[::2]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L1", "completion": "    odds = l[1::2]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L2", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert tuple(candidate([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])) == tuple([-10, 3, -5, 2, -3, 3, 5, 0, 9, 1, 123])"}
+{"task_id": "SingleLineInfilling/HumanEval/37/L3", "completion": "    ans = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L4", "completion": "    for e, o in zip(evens, odds):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L5", "completion": "        ans.append(e)\n        ans.append(o)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L6", "completion": "    if evens:\n", "passed": false, "kind": "assertion", "msg": "assert tuple(candidate([5, 8, -12, 4, 23, 2, 3, 11, 12, -10])) == tuple([-12, 8, 3, 4, 5, 2, 12, 11, 23, -10])"}
+{"task_id": "SingleLineInfilling/HumanEval/37/L7", "completion": "        ans.extend(evens[len(odds):])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/37/L8", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/38/L0", "completion": "if __name__ == \"__main__\":\n    print(encode_cyclic(\"abc\"))\n    print(decode_cyclic(\"abc\"))\n    print(encode_cyclic(\"abcd\"))\n    print(decode_cyclic(\"abcd\"))\n    print(encode_cyclic(\"abcde\"))\n    print(decode_cyclic(\"abcde\"))\n    print(encode_cyclic(\"abcdef\"))\n    print(decode_cyclic(\"abcdef\"))\n    print(encode_cyclic(\"abcdefg\"))\n    print(decode_cyclic(\"abcdefg\"))\n    print(encode_cyclic(\"abcdefgh\"))\n    print(decode_cyclic(\"abcdefgh\"))\n    print(encode_cyclic(\"abcdefghi\"))\n    print(decode_cyclic(\"abcdefghi\"))\n    print(encode_cyclic(\"abcdefghij\"))\n    print(decode_cyclic(\"abcdefghij\"))\n    print(encode_cyclic(\"abcdefghijk\"))\n    print(decode_cyclic(\"abcdefghijk\"))\n    print(encode_cyclic(\"abcdefghijkl\"))\n    print(decode_cyclic(\"abcdefghijkl\"))\n    print(encode_cyclic(\"abcdefghijklm\"))\n    print(decode_cyclic(\"abcdefghijklm\"))\n    print(encode_cyclic(\"abcdefghijklmn\"))\n    print(decode_cyclic(\"abcdefghijklmn\"))\n    print(encode_cyclic(\"abcdefghijklmno\"))\n    print(decode_cyclic(\"abcdefghijklmno\"))\n    print(encode_cyclic(\"abcdefghijklmnop\"))\n    print(decode_cyclic(\"abcdefghijklmnop\"))\n    print(encode_cyclic(\"\n", "passed": false, "kind": "syntax", "msg": "SyntaxError: unterminated string literal (detected at line 48)"}
+{"task_id": "SingleLineInfilling/HumanEval/39/L0", "completion": "    import math\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L2", "completion": "    def is_prime(p):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L3", "completion": "        if p < 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L4", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L5", "completion": "        for k in range(2, int(math.sqrt(p)) + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L6", "completion": "            if p % k == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L7", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L8", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L9", "completion": "\n    f = [1, 1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L10", "completion": "    while True:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L11", "completion": "        f.append(f[-1] + f[-2])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L12", "completion": "        if is_prime(f[-1]):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L13", "completion": "            n -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/39/L14", "completion": "            if n == 0:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 31"}
+{"task_id": "SingleLineInfilling/HumanEval/39/L15", "completion": "            return f[-1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L0", "completion": "    for i in range(len(l)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L1", "completion": "        for j in range(i + 1, len(l)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L2", "completion": "            for k in range(j + 1, len(l)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L3", "completion": "                if l[i] + l[j] + l[k] == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L4", "completion": "                    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/40/L5", "completion": "    return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/41/L0", "completion": "#     return 0\n\n    return n * (n - 1) // 2\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2) == 4"}
+{"task_id": "SingleLineInfilling/HumanEval/42/L0", "completion": "#     return [x + 1 for x in l]\n    return [x + 1 for x in l]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/43/L0", "completion": "    for i in range(len(l)):\n        l1 = l[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/43/L1", "completion": "        for j in range(i + 1, len(l)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/43/L2", "completion": "            if l1 + l[j] == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/43/L3", "completion": "                return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/43/L4", "completion": "print(pairs_sum_to_zero([1, 3, 5, 0]))\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 3, 5, 0]) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/44/L0", "completion": "    ret = ''\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/44/L1", "completion": "    while x:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/44/L2", "completion": "        ret = str(x % base) + ret\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/44/L3", "completion": "        x //= base\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/44/L4", "completion": "    return ret\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/45/L0", "completion": "#     return a * h / 2\n    return a * h / 2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L0", "completion": "    results = [0, 0, 2, 0]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L1", "completion": "\n    if n <= 3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L2", "completion": "        return results[n]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L4", "completion": "    for _ in range(4, n + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L5", "completion": "        results.append(results[-1] + results[-2] + results[-3] + results[-4])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L6", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/46/L8", "completion": "    return results[n]\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/47/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate([3, 1, 2, 4, 5]) == 3"}
+{"task_id": "SingleLineInfilling/HumanEval/47/L1", "completion": "    if len(l) % 2 == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/47/L2", "completion": "        return l[len(l) // 2]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/47/L3", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/47/L4", "completion": "        return (l[len(l) // 2] + l[len(l) // 2 - 1]) / 2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/48/L0", "completion": "    for i in range(len(text) // 2):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/48/L1", "completion": "        if text[i] != text[-i - 1]:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/48/L2", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/48/L3", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/49/L0", "completion": "    ret = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/49/L1", "completion": "    while n:\n        if n & 1:\n            ret = (ret * 2) % p\n        n >>= 1\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3, 5) == 3"}
+{"task_id": "SingleLineInfilling/HumanEval/49/L2", "completion": "        ret = (ret * 2) % p\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/49/L3", "completion": "    return ret\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/50/L0", "completion": "    return \"\".join([chr(((ord(ch) - ord(\"a\")) - 5) % 26) + ord(\"a\")) for ch in s])\n", "passed": false, "kind": "syntax", "msg": "SyntaxError: closing parenthesis ')' does not match opening parenthesis '['"}
+{"task_id": "SingleLineInfilling/HumanEval/51/L0", "completion": "#     return text.translate(str.maketrans('', '', 'aeiouAEIOU'))\n    return ''.join(c for c in text if c not in 'aeiouAEIOU')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/52/L0", "completion": "    for e in l:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/52/L1", "completion": "        if e < t:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 2, 4, 10], 100)"}
+{"task_id": "SingleLineInfilling/HumanEval/52/L2", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/52/L3", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/53/L0", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate(0, 1) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/54/L0", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate('eabcdzzzz', 'dddzzzzzzzddeddabc') == True"}
+{"task_id": "SingleLineInfilling/HumanEval/55/L0", "completion": "    if n == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/55/L1", "completion": "        return 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/55/L2", "completion": "    if n == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/55/L3", "completion": "        return 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/55/L4", "completion": "    return fib(n - 1) + fib(n - 2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L0", "completion": "    depth = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L1", "completion": "    for b in brackets:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L2", "completion": "        if b == \"<\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L3", "completion": "            depth += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L4", "completion": "        elif b == \">\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L5", "completion": "            depth -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L6", "completion": "            if depth < 0:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 22"}
+{"task_id": "SingleLineInfilling/HumanEval/56/L7", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/56/L8", "completion": "    return depth == 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/57/L0", "completion": "    if l == sorted(l):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4, 1, 0, -10]) == True"}
+{"task_id": "SingleLineInfilling/HumanEval/57/L1", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/57/L2", "completion": "    return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L0", "completion": "    ret = set()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L1", "completion": "    for e1 in l1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L2", "completion": "        for e2 in l2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L3", "completion": "            if e1 == e2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L4", "completion": "                ret.add(e1)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/58/L5", "completion": "    return sorted(ret)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L0", "completion": "    def is_prime(k):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L1", "completion": "        if k <= 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L2", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L3", "completion": "        for i in range(2, k):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L4", "completion": "            if k % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L5", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L6", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L7", "completion": "\n    largest = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L8", "completion": "    for j in range(2, n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L9", "completion": "        if n % j == 0 and is_prime(j):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L10", "completion": "            largest = j\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/59/L11", "completion": "    return largest\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/60/L0", "completion": "if __name__ == \"__main__\":\n    import doctest\n    doctest.testmod()\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/61/L0", "completion": "    depth = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L1", "completion": "    for b in brackets:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L2", "completion": "        if b == \"(\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L3", "completion": "            depth += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L4", "completion": "        elif b == \")\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L5", "completion": "            depth -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L6", "completion": "            if depth < 0:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 22"}
+{"task_id": "SingleLineInfilling/HumanEval/61/L7", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/61/L8", "completion": "    return depth == 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/62/L0", "completion": "#     if len(xs) == 1:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([3, 1, 2, 4, 5]) == [1, 4, 12, 20]"}
+{"task_id": "SingleLineInfilling/HumanEval/63/L0", "completion": "    if n == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L1", "completion": "        return 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L2", "completion": "    if n == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L3", "completion": "        return 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L4", "completion": "    if n == 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L5", "completion": "        return 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/63/L6", "completion": "    return fibfib(n-1) + fibfib(n-2) + fibfib(n-3)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/64/L0", "completion": "    vowels = 'aeiou'\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Alone\") == 3, \"Test 2\""}
+{"task_id": "SingleLineInfilling/HumanEval/64/L1", "completion": "    n_vowels = 0\n    for c in s:\n        if c in vowels:\n            n_vowels += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/64/L2", "completion": "    if s.endswith(\"y\"):\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"keY\") == 2, \"Test 5\""}
+{"task_id": "SingleLineInfilling/HumanEval/64/L3", "completion": "        n_vowels += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/64/L4", "completion": "    return n_vowels\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/65/L0", "completion": "    s = str(x)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/65/L1", "completion": "    if shift > len(s):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/65/L2", "completion": "        return s[-shift:] + s[:-shift]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(97, 8) == \"79\""}
+{"task_id": "SingleLineInfilling/HumanEval/65/L3", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/65/L4", "completion": "        return s[shift:] + s[:shift]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(100, 2) == \"001\""}
+{"task_id": "SingleLineInfilling/HumanEval/66/L0", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/66/L1", "completion": "    return sum(ord(c) for c in s if 'A' <= c <= 'Z')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/67/L0", "completion": "    lis = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/67/L1", "completion": "    for i in s.split():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/67/L2", "completion": "        if i.isdigit():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/67/L3", "completion": "            lis.append(int(i))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/67/L4", "completion": "#     print(lis)\n    return n - lis[0] - lis[1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/68/L0", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/68/L1", "completion": "    evens = [x for x in arr if x % 2 == 0]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/68/L2", "completion": "\n", "passed": false, "kind": "exception", "msg": "ValueError: min() iterable argument is empty"}
+{"task_id": "SingleLineInfilling/HumanEval/68/L3", "completion": "    return [min(evens), evens.index(min(evens))]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1,2,3]) == [2, 1], \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L0", "completion": "    frq = [0] * (max(lst) + 1)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L1", "completion": "    for i in lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L2", "completion": "        frq[i] += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L4", "completion": "    ans = -1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L5", "completion": "    for i in range(len(frq)):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([3, 3]) == -1"}
+{"task_id": "SingleLineInfilling/HumanEval/69/L6", "completion": "        if frq[i] >= i:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/69/L7", "completion": "            ans = i\n            break\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4, 1, 4, 1, 4, 4]) == 4"}
+{"task_id": "SingleLineInfilling/HumanEval/69/L9", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L0", "completion": "    res = []\n    switch = True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L1", "completion": "    while lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L2", "completion": "        if switch:\n            res.append(min(lst))\n        else:\n            res.append(max(lst))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L3", "completion": "        lst.remove(min(lst) if switch else max(lst))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L4", "completion": "        switch = not switch\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/70/L5", "completion": "    return res\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/71/L0", "completion": "    if a + b <= c or a + c <= b or b + c <= a:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/71/L1", "completion": "        return -1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/71/L2", "completion": "    s = (a + b + c) / 2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/71/L3", "completion": "    area = (s*(s-a)*(s-b)*(s-c))**0.5\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/71/L4", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(4, 8, 5) == 8.18"}
+{"task_id": "SingleLineInfilling/HumanEval/71/L5", "completion": "    return area\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L0", "completion": "    if len(q) == 0:\n        return True\n\n    if sum(q) > w:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L1", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L3", "completion": "    i = 0\n    j = len(q)-1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L4", "completion": "    while i < j:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L5", "completion": "        if q[i] + q[j] > w:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 2], 5) is False"}
+{"task_id": "SingleLineInfilling/HumanEval/72/L6", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L7", "completion": "        i+=1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L8", "completion": "        j-=1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/72/L9", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/73/L0", "completion": "    ans = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/73/L1", "completion": "    for i in range(len(arr) // 2):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/73/L2", "completion": "        if arr[i] != arr[len(arr) - 1 - i]:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/73/L3", "completion": "            ans += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/73/L4", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L0", "completion": "    l1 = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L1", "completion": "    for st in lst1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L2", "completion": "        l1 += len(st)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L4", "completion": "    l2 = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L5", "completion": "    for st in lst2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L6", "completion": "        l2 += len(st)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L8", "completion": "    if l1 < l2:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(['hi', 'admin'], ['hI', 'hi', 'hii']) == ['hi', 'admin']"}
+{"task_id": "SingleLineInfilling/HumanEval/74/L9", "completion": "        return lst1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L10", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/74/L11", "completion": "        return lst2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L0", "completion": "    def is_prime(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L1", "completion": "        for j in range(2,n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L2", "completion": "            if n % j == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L3", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L4", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L6", "completion": "    for i in range(2,101):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L7", "completion": "        if not is_prime(i): continue\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L8", "completion": "        for j in range(2,101):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L9", "completion": "            if not is_prime(j): continue\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L10", "completion": "            for k in range(2,101):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L11", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3 * 6 * 7) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/75/L12", "completion": "                if i*j*k == a:\n                    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/75/L13", "completion": "print(is_multiply_prime(30))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(5) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/76/L0", "completion": "    if (n == 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/76/L1", "completion": "        return (x == 1)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/76/L2", "completion": "    power = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/76/L3", "completion": "    for i in range(1, n):\n", "passed": false, "kind": "assertion", "msg": "assert candidate(16, 2)== True, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/76/L4", "completion": "        power = power * n\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/76/L5", "completion": "#        print(power)\n    if (power == x): \n        return True\n    else: \n        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/77/L0", "completion": "\n", "passed": false, "kind": "exception", "msg": "TypeError: type complex doesn't define __round__ method"}
+{"task_id": "SingleLineInfilling/HumanEval/77/L1", "completion": "#     print(a)\n    if a == 0:\n        return True\n    if a % 3 != 0:\n        return False\n    b = a // 3\n    if b % 3 != 0:\n        return False\n    c = b // 3\n    if c % 3 != 0:\n        return False\n    if c % 3 != 0:\n        return False\n    return True\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1) == True, \"First test error: \" + str(candidate(1))"}
+{"task_id": "SingleLineInfilling/HumanEval/78/L0", "completion": "    primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"AB\") == 1, \"First test error: \" + str(candidate(\"AB\"))      "}
+{"task_id": "SingleLineInfilling/HumanEval/78/L1", "completion": "    total = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/78/L2", "completion": "    for i in range(len(num)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/78/L3", "completion": "        if num[i] in primes:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/78/L4", "completion": "            total += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/78/L5", "completion": "    return total\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/79/L0", "completion": "#     return str(bin(decimal)[2:])\n    return str(bin(decimal)[2:])[2:]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(0) == \"db0db\""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L0", "completion": "    if len(s) < 3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L1", "completion": "      return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L3", "completion": "    for i in range(len(s)-2):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L5", "completion": "      if s[i] == s[i + 2]:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"aabb\") == False , \"aabb\""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L6", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/80/L7", "completion": "\n    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L2", "completion": "    letter_grade = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L3", "completion": "    for gpa in grades:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L4", "completion": "        if gpa > 4.0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'B', 'C-', 'C', 'A-']"}
+{"task_id": "SingleLineInfilling/HumanEval/81/L5", "completion": "            letter_grade.append(\"A+\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L6", "completion": "        elif gpa > 3.7:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L7", "completion": "            letter_grade.append(\"A\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L8", "completion": "        elif gpa > 3.3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L9", "completion": "            letter_grade.append(\"A-\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L10", "completion": "        elif gpa > 3.0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L11", "completion": "            letter_grade.append(\"B+\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L12", "completion": "        elif gpa > 2.7:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L13", "completion": "            letter_grade.append(\"B\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L14", "completion": "        elif gpa > 2.3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L15", "completion": "            letter_grade.append(\"B-\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L16", "completion": "        elif gpa > 2.0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L17", "completion": "            letter_grade.append(\"C+\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L18", "completion": "        elif gpa > 1.7:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L19", "completion": "            letter_grade.append(\"C\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L20", "completion": "        elif gpa > 1.3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L21", "completion": "            letter_grade.append(\"C-\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L22", "completion": "        elif gpa > 1.0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L23", "completion": "            letter_grade.append(\"D+\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L24", "completion": "        elif gpa > 0.7:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L25", "completion": "            letter_grade.append(\"D\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L26", "completion": "        elif gpa > 0.0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L27", "completion": "            letter_grade.append(\"D-\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L28", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L29", "completion": "            letter_grade.append(\"E\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/81/L30", "completion": "#\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'B', 'C-', 'C', 'A-']"}
+{"task_id": "SingleLineInfilling/HumanEval/82/L0", "completion": "    l = len(string)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/82/L1", "completion": "    if l == 1:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('') == False"}
+{"task_id": "SingleLineInfilling/HumanEval/82/L2", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/82/L3", "completion": "    for i in range(2, l):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/82/L4", "completion": "        if l % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/82/L5", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/82/L6", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/83/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/83/L1", "completion": "    if n == 2: return 2\n    if n == 3: return 4\n    if n == 4: return 7\n    if n == 5: return 13\n    if n == 6: return 24\n    if n == 7: return 44\n    if n == 8: return 81\n    if n == 9: return 149\n    if n == 10: return 274\n    if n == 11: return 409\n    if n == 12: return 610\n    if n == 13: return 987\n    if n == 14: return 1597\n    if n == 15: return 2584\n    if n == 16: return 4181\n    if n == 17: return 6765\n    if n == 18: return 10946\n    if n == 19: return 17711\n    if n == 20: return 28657\n    if n == 21: return 46368\n    if n == 22: return 75025\n    if n == 23: return 121393\n    if n == 24: return 196418\n    if n == 25: return 317811\n    if n == 26: return 514229\n    if n == 27: return 832040\n    if n == 28: return 1346269\n    if n == 29: return 2178309\n    if n == 30: return 3524578\n    if n == 31: return 5702887\n    if n == 32: return 9227465\n    if n == 33: return 14930352\n    if\n", "passed": false, "kind": "syntax", "msg": "SyntaxError: invalid syntax"}
+{"task_id": "SingleLineInfilling/HumanEval/84/L0", "completion": "def main():\n    N = int(input())\n    print(solve(N))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1000) == \"1\", \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/85/L0", "completion": "#     lst = [4, 2, 6, 7]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4, 88]) == 88"}
+{"task_id": "SingleLineInfilling/HumanEval/86/L0", "completion": "#     return s\n\n    return ' '.join(sorted(s.split()))\n", "passed": false, "kind": "assertion", "msg": "assert candidate('hello') == 'ehllo'"}
+{"task_id": "SingleLineInfilling/HumanEval/87/L0", "completion": "    coords = [(i, lst[i].index(x)) for i in range(len(lst)) if x in lst[i]]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(["}
+{"task_id": "SingleLineInfilling/HumanEval/87/L1", "completion": "#     coords = [(i, j) for i in range(len(lst)) for j in range(len(lst[i])) if lst[i][j] == x]\n    coords.sort(key=lambda x: x[0])\n    coords.sort(key=lambda x: x[1], reverse=True)\n    return coords\n", "passed": false, "kind": "assertion", "msg": "assert candidate(["}
+{"task_id": "SingleLineInfilling/HumanEval/88/L0", "completion": "def test_sort_array():\n    assert sort_array([]) == []\n    assert sort_array([5]) == [5]\n    assert sort_array([2, 4, 3, 0, 1, 5]) == [0, 1, 2, 3, 4, 5]\n    assert sort_array([2, 4, 3, 0, 1, 5, 6]) == [6, 5, 4, 3, 2, 1, 0]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([]) == [], \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L0", "completion": "    d = 'abcdefghijklmnopqrstuvwxyz'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L1", "completion": "    out = ''\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L2", "completion": "    for c in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L3", "completion": "        if c in d:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L4", "completion": "            out += d[(d.index(c) + 2) % 26]\n", "passed": false, "kind": "assertion", "msg": "assert candidate('hi') == 'lm', \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L5", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L6", "completion": "            out += c\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/89/L7", "completion": "    return out\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/90/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5, 1, 4, 3, 2]) == 2"}
+{"task_id": "SingleLineInfilling/HumanEval/90/L1", "completion": "    if len(lst) == 0:\n        return None\n    return lst[1]\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/91/L0", "completion": "    import re\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/91/L1", "completion": "    sentences = re.split(r'[.?!]', S)\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"I feel good today. I will be productive. will kill It\") == 2, \"Test 5\""}
+{"task_id": "SingleLineInfilling/HumanEval/91/L2", "completion": "    return sum(1 for s in sentences if s.startswith('I'))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Is the sky blue?\") == 0, \"Test 2\""}
+{"task_id": "SingleLineInfilling/HumanEval/92/L1", "completion": "    if x+y+z==100:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2, 3, 1)==True, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/92/L2", "completion": "        if x+y==z or x-y==z or x*y==z or x/y==z:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2, 3, 1)==True, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/92/L3", "completion": "            return True\n        else:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'else' statement on line 24"}
+{"task_id": "SingleLineInfilling/HumanEval/92/L4", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/92/L5", "completion": "any_int(5, 2, 7) #\u279e True\nany_int(3, 2, 2) #\u279e False\nany_int(3, -2, 1) #\u279e True\nany_int(3.6, -2.2, 2) #\u279e False\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2.5, 2, 3)==False, \"This prints if this assert fails 2 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/93/L0", "completion": "    vowels = 'aeiouAEIOU'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/93/L1", "completion": "    vowels_replace = {\n        'a': '4',\n        'e': '3',\n        'i': '1',\n        'o': '0',\n        'u': '2'\n    }\n", "passed": false, "kind": "assertion", "msg": "assert candidate('TEST') == 'tgst', \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/93/L2", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate('TEST') == 'tgst', \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/93/L3", "completion": "    message = message.replace(\" \", \"\")\n    message = message.translate(str.maketrans(vowels, vowels_replace))\n    return message\n", "passed": false, "kind": "exception", "msg": "TypeError: maketrans() argument 2 must be str, not dict"}
+{"task_id": "SingleLineInfilling/HumanEval/94/L0", "completion": "    def isPrime(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L1", "completion": "        for i in range(2,n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L2", "completion": "            if n % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L3", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L5", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L6", "completion": "\n    maxx = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L7", "completion": "    i = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L8", "completion": "    while i < len(lst):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L9", "completion": "        if isPrime(lst[i]):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3]) == 10, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L10", "completion": "            maxx = lst[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L11", "completion": "        i += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L12", "completion": "    result = 0\n    while maxx > 0:\n        result += maxx%10\n        maxx = maxx//10\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/94/L13", "completion": "    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L0", "completion": "    if len(dict) == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L1", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L2", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L3", "completion": "        state = \"start\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L4", "completion": "        for key in dict.keys():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L6", "completion": "            if not isinstance(key, str):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L7", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate({\"p\":\"pineapple\", 5:\"banana\", \"a\":\"apple\"}) == False, \"Third test error: \" + str(candidate({\"p\":\"pineapple\", 5:\"banana\", \"a\":\"apple\"}))"}
+{"task_id": "SingleLineInfilling/HumanEval/95/L8", "completion": "                break\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L9", "completion": "            elif state == \"start\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L10", "completion": "                if key.isupper():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L11", "completion": "                    state = \"upper\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L12", "completion": "                elif key.islower():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L13", "completion": "                    state = \"lower\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L14", "completion": "                else:\n                    state = \"mixed\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L15", "completion": "                    state = \"mixed\"\n                    break\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L16", "completion": "            elif state == \"upper\":\n                if key.isupper():\n                    state = \"mixed\"\n                    break\n            elif state == \"lower\":\n                if key.islower():\n", "passed": false, "kind": "assertion", "msg": "assert candidate({\"p\":\"pineapple\", \"b\":\"banana\"}) == True, \"First test error: \" + str(candidate({\"p\":\"pineapple\", \"b\":\"banana\"}))"}
+{"task_id": "SingleLineInfilling/HumanEval/95/L17", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate({\"p\":\"pineapple\", \"A\":\"banana\", \"B\":\"banana\"}) == False, \"Second test error: \" + str(candidate({\"p\":\"pineapple\", \"A\":\"banana\", \"B\":\"banana\"}))"}
+{"task_id": "SingleLineInfilling/HumanEval/95/L18", "completion": "                    break\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L19", "completion": "            else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/95/L20", "completion": "                state = \"mixed\"\n                break\n", "passed": false, "kind": "assertion", "msg": "assert candidate({\"p\":\"pineapple\", \"b\":\"banana\"}) == True, \"First test error: \" + str(candidate({\"p\":\"pineapple\", \"b\":\"banana\"}))"}
+{"task_id": "SingleLineInfilling/HumanEval/95/L21", "completion": "#             print(key, state)\n        if state == \"mixed\":\n            return False\n        else:\n            return True\n", "passed": false, "kind": "assertion", "msg": "assert candidate({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) == False, \"Fourth test error: \" + str(candidate({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}))"}
+{"task_id": "SingleLineInfilling/HumanEval/96/L0", "completion": "    primes = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L1", "completion": "    for i in range(2, n+1):\n", "passed": false, "kind": "assertion", "msg": "assert candidate(5) == [2,3]"}
+{"task_id": "SingleLineInfilling/HumanEval/96/L2", "completion": "        is_prime = True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L3", "completion": "        for j in range(2, i):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L4", "completion": "            if i % j == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L5", "completion": "                is_prime = False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L6", "completion": "                break\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L7", "completion": "        if is_prime:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L8", "completion": "            primes.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/96/L9", "completion": "    return primes\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/97/L0", "completion": "#     if a < 0 or b < 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(148, 412) == 16, \"First test error: \" + str(candidate(148, 412))                    "}
+{"task_id": "SingleLineInfilling/HumanEval/98/L0", "completion": "    count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/98/L1", "completion": "    for i in range(len(s)):\n", "passed": false, "kind": "assertion", "msg": "assert candidate('dBBE') == 0"}
+{"task_id": "SingleLineInfilling/HumanEval/98/L2", "completion": "        if s[i].isupper():\n", "passed": false, "kind": "assertion", "msg": "assert candidate('aBCdEf')  == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/98/L3", "completion": "            count += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/98/L4", "completion": "    return count\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L0", "completion": "    from math import ceil, floor\n\n    # remove trailing zeros\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L2", "completion": "    if value[-1] == '.':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L3", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L4", "completion": "        while value[-1] == '0':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L5", "completion": "            value = value[:-1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L7", "completion": "    num = float(value)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L8", "completion": "\n    if num.is_integer():\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"14.5\") == 15, \"Test 2\""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L9", "completion": "        if num % 1 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"14.5\") == 15, \"Test 2\""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L10", "completion": "            res = ceil(num)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L11", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L12", "completion": "            res = floor(num)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L13", "completion": "    elif value[-1] == '.':\n        if num > 0:\n            res = int(round(num)) + 1\n        else:\n            res = int(round(num)) - 1\n    elif num > 0:\n        res = int(round(num)) + 1\n    elif num < 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"10\") == 10, \"Test 1\""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L14", "completion": "        res = int(value)\n", "passed": false, "kind": "exception", "msg": "ValueError: invalid literal for int() with base 10: '15.3'"}
+{"task_id": "SingleLineInfilling/HumanEval/99/L15", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L16", "completion": "        res = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/99/L18", "completion": "    return res\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/100/L0", "completion": "def test_make_a_pile():\n    assert make_a_pile(3) == [3, 5, 7]\n    assert make_a_pile(4) == [4, 6, 8]\n    assert make_a_pile(5) == [5, 7, 9]\n    assert make_a_pile(6) == [6, 8, 10]\n    assert make_a_pile(7) == [7, 9, 11]\n    assert make_a_pile(8) == [8, 10, 12]\n    assert make_a_pile(9) == [9, 11, 13]\n    assert make_a_pile(10) == [10, 12, 14]\n    assert make_a_pile(11) == [11, 13, 15]\n    assert make_a_pile(12) == [12, 14, 16]\n    assert make_a_pile(13) == [13, 15, 17]\n    assert make_a_pile(14) == [14, 16, 18]\n    assert make_a_pile(15) == [15, 17, 19]\n    assert make_a_pile(16) == [16, 18, 20]\n    assert make_a_pile(17) == [17, 19, 21]\n    assert make_a_pile(18) == [18, 20, 22]\n    assert make_a_pile(19) == [19, 21, 23]\n    assert make_a_pile(20) ==\n", "passed": false, "kind": "syntax", "msg": "SyntaxError: invalid syntax"}
+{"task_id": "SingleLineInfilling/HumanEval/101/L0", "completion": "    if s == \"\":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L1", "completion": "        return []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L3", "completion": "    s_list = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L5", "completion": "    for letter in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L6", "completion": "        if letter == ',':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L7", "completion": "            s_list.append(' ')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L8", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L9", "completion": "            s_list.append(letter)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/101/L11", "completion": "\n", "passed": false, "kind": "exception", "msg": "AttributeError: 'list' object has no attribute 'split'"}
+{"task_id": "SingleLineInfilling/HumanEval/101/L12", "completion": "\n    return s_list.split()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/102/L0", "completion": "    if x % 2 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(12, 15) == 14"}
+{"task_id": "SingleLineInfilling/HumanEval/102/L1", "completion": "        x, y = y, x\n", "passed": false, "kind": "assertion", "msg": "assert candidate(13, 12) == -1"}
+{"task_id": "SingleLineInfilling/HumanEval/102/L2", "completion": "    if x % 2 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(12, 15) == 14"}
+{"task_id": "SingleLineInfilling/HumanEval/102/L3", "completion": "        return y\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/102/L4", "completion": "    if x % 2 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(12, 15) == 14"}
+{"task_id": "SingleLineInfilling/HumanEval/102/L5", "completion": "        return x\n", "passed": false, "kind": "assertion", "msg": "assert candidate(7, 7) == -1"}
+{"task_id": "SingleLineInfilling/HumanEval/102/L6", "completion": "#     if x % 2 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(12, 15) == 14"}
+{"task_id": "SingleLineInfilling/HumanEval/103/L0", "completion": "    if n > m:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/103/L1", "completion": "        return -1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/103/L2", "completion": "    summation = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/103/L3", "completion": "    for i in range(n, m + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/103/L4", "completion": "        summation += i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/103/L5", "completion": "    return bin(summation//(m-n+1))[2:]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1, 5) == \"0b11\""}
+{"task_id": "SingleLineInfilling/HumanEval/104/L0", "completion": "    odd_digit_elements = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/104/L1", "completion": "    for i in x:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/104/L2", "completion": "        if not any(int(j) % 2 == 0 for j in str(i)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/104/L3", "completion": "            odd_digit_elements.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/104/L4", "completion": "    return sorted(odd_digit_elements)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L0", "completion": "    dic = {\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L1", "completion": "        1: \"One\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L2", "completion": "        2: \"Two\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L3", "completion": "        3: \"Three\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L4", "completion": "        4: \"Four\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L5", "completion": "        5: \"Five\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L6", "completion": "        6: \"Six\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L7", "completion": "        7: \"Seven\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L8", "completion": "        8: \"Eight\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L9", "completion": "        9: \"Nine\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L10", "completion": "    }\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L11", "completion": "    if len(arr) == 0:\n        return []\n    sorted_arr = sorted(arr)\n", "passed": false, "kind": "assertion", "msg": "assert candidate([2, 1, 1, 4, 5, 8, 2, 3]) == [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"], \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L12", "completion": "    new_arr = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L13", "completion": "    for var in sorted_arr:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L14", "completion": "        try:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L15", "completion": "            new_arr.append(dic[var])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L16", "completion": "        except KeyError:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L17", "completion": "            new_arr.append(\"One\")\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, -1 , 55]) == ['One'], \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/105/L18", "completion": "    return new_arr\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L0", "completion": "    ret = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L1", "completion": "    for i in range(1,n+1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L2", "completion": "        if i % 2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L3", "completion": "            x = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L4", "completion": "            for j in range(1,i+1): x *= j\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L5", "completion": "            ret += [x]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L6", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L7", "completion": "            x = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L8", "completion": "            for j in range(1,i+1): x += j\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L9", "completion": "            ret += [x]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/106/L10", "completion": "    return ret\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L0", "completion": "    def is_palindrome(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L1", "completion": "        return str(n) == str(n)[::-1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L3", "completion": "    even_palindrome_count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L4", "completion": "    odd_palindrome_count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L6", "completion": "    for i in range(1, n+1):\n        if i%2 == 0 and i != 2:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 32"}
+{"task_id": "SingleLineInfilling/HumanEval/107/L7", "completion": "        if i%2 != 0 and is_palindrome(i):\n            if i%2 == 0:\n                even_palindrome_count += 1\n            else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L8", "completion": "            odd_palindrome_count += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L9", "completion": "        elif i%2 == 0 and is_palindrome(i):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L10", "completion": "                even_palindrome_count += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/107/L11", "completion": "\n    return even_palindrome_count, odd_palindrome_count\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/108/L0", "completion": "    def digits_sum(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/108/L1", "completion": "        neg = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/108/L2", "completion": "        if n < 0:\n            neg = -1\n", "passed": false, "kind": "exception", "msg": "ValueError: invalid literal for int() with base 10: '-'"}
+{"task_id": "SingleLineInfilling/HumanEval/108/L3", "completion": "\n", "passed": false, "kind": "exception", "msg": "TypeError: 'int' object is not subscriptable"}
+{"task_id": "SingleLineInfilling/HumanEval/108/L4", "completion": "        n = [i * neg for i in n]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([12, 23, 34, -45, -56, 0]) == 5"}
+{"task_id": "SingleLineInfilling/HumanEval/108/L5", "completion": "        return sum(n)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/108/L6", "completion": "#     return sum([1 for i in arr if digits_sum(i) > 0])\n    return sum([1 for i in arr if i > 0 and digits_sum(i) > 0])\n", "passed": false, "kind": "assertion", "msg": "assert candidate([12, 23, 34, -45, -56, 0]) == 5"}
+{"task_id": "SingleLineInfilling/HumanEval/109/L0", "completion": "    if len(arr)==0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L1", "completion": "      return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L2", "completion": "    sorted_array=sorted(arr)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L3", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L5", "completion": "    min_value=min(arr)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L6", "completion": "    min_index=arr.index(min_value)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L7", "completion": "    my_arr=arr[min_index:]\n    my_arr.extend(arr[:min_index])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L8", "completion": "    for i in range(len(my_arr)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L9", "completion": "      if my_arr[i]!=sorted_array[i]:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L10", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/109/L11", "completion": "    return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L0", "completion": "    odd = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L1", "completion": "    even = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L2", "completion": "    for i in lst1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L3", "completion": "        if i%2 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5, 7, 3], [2, 6, 3]) == \"NO\" "}
+{"task_id": "SingleLineInfilling/HumanEval/110/L4", "completion": "            odd += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L5", "completion": "    for i in lst2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L6", "completion": "        if i%2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L7", "completion": "            even += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L8", "completion": "    if odd == even:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([100, 200], [200, 200]) == \"YES\""}
+{"task_id": "SingleLineInfilling/HumanEval/110/L9", "completion": "        return \"YES\"\n    else:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'else' statement on line 25"}
+{"task_id": "SingleLineInfilling/HumanEval/110/L10", "completion": "    else:\n        return \"NO\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L0", "completion": "    dict1={}\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L1", "completion": "    list1=test.split()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L2", "completion": "    t=0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L4", "completion": "    for i in list1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L5", "completion": "        if i not in dict1:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('b b b b a') == {'b': 4}, \"This prints if this assert fails 5 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L6", "completion": "            t=list1.count(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L7", "completion": "\n    if(t!=0):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L8", "completion": "        for i in list1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L9", "completion": "            if(list1.count(i)==t):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L11", "completion": "                dict1[i]=list1.count(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/111/L12", "completion": "    return dict1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/112/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"abcde\",\"ae\") == ('bcd',False)"}
+{"task_id": "SingleLineInfilling/HumanEval/112/L1", "completion": "    return s, s == s[::-1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/113/L0", "completion": "    res = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/113/L1", "completion": "    for arr in lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/113/L2", "completion": "        n = 0\n        for i in arr:\n            if int(i) % 2 == 1:\n                n += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/113/L3", "completion": "        res.append(\"the number of odd elements in the string {} of the input.\".format(arr))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(['1234567']) == [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"], \"Test 1\""}
+{"task_id": "SingleLineInfilling/HumanEval/113/L4", "completion": "    return res\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L0", "completion": "    max_sum = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L1", "completion": "    s = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L2", "completion": "    for num in nums:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L3", "completion": "        s += num\n", "passed": false, "kind": "assertion", "msg": "assert candidate([2, 3, 4, 1, 2, 4]) == 1, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L4", "completion": "        if s < 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L5", "completion": "            s = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L6", "completion": "        max_sum = max(max_sum, s)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L7", "completion": "    if max_sum < 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([2, 3, 4, 1, 2, 4]) == 1, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L8", "completion": "        min_sum = 0\n    else:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'else' statement on line 19"}
+{"task_id": "SingleLineInfilling/HumanEval/114/L9", "completion": "    min_sum = max_sum\n", "passed": false, "kind": "assertion", "msg": "assert candidate([2, 3, 4, 1, 2, 4]) == 1, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/114/L10", "completion": "    return min_sum\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/115/L0", "completion": "if __name__ == \"__main__\":\n    grid = [[0,0,1,0], [0,1,0,0], [1,1,1,1]]\n    capacity = 1\n    print(max_fill(grid, capacity))\n", "passed": false, "kind": "assertion", "msg": "assert candidate([[0,0,1,0], [0,1,0,0], [1,1,1,1]], 1) == 6, \"Error\""}
+{"task_id": "SingleLineInfilling/HumanEval/116/L0", "completion": "def test_sort_array():\n    assert sort_array([1, 5, 2, 3, 4]) == [1, 2, 3, 4, 5]\n    assert sort_array([-2, -3, -4, -5, -6]) == [-6, -5, -4, -3, -2]\n    assert sort_array([1, 0, 2, 3, 4]) == [0, 1, 2, 3, 4]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1,5,2,3,4]) == [1, 2, 4, 3, 5]"}
+{"task_id": "SingleLineInfilling/HumanEval/117/L0", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L1", "completion": "    words = s.split()\n    for word in words:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L2", "completion": "        n_consonants = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L3", "completion": "        for i in range(len(word)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L4", "completion": "            if word[i] not in \"aeiou\":\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Uncle sam\", 3) == [\"Uncle\"], \"Fifth test error: \" + str(candidate(\"Uncle sam\", 3))"}
+{"task_id": "SingleLineInfilling/HumanEval/117/L5", "completion": "                n_consonants += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L6", "completion": "        if n_consonants == n:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L7", "completion": "            result.append(word)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/117/L8", "completion": "    return result\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L0", "completion": "    if len(word) < 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L1", "completion": "        return \"\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L3", "completion": "    vowels = \"aeiouAEIOU\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L4", "completion": "    for i in range(len(word)-1, -1, -1):\n", "passed": false, "kind": "exception", "msg": "IndexError: string index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/118/L5", "completion": "        if word[i] in vowels:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L6", "completion": "            if word[i+1] in vowels:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"yogurt\") == \"u\""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L7", "completion": "                return word[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/118/L8", "completion": "print(get_closest_vowel(\"yogurt\"))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"easy\") == \"\""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L0", "completion": "    def check(s):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L1", "completion": "        val = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L2", "completion": "        for i in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L3", "completion": "            if i == '(':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L4", "completion": "                val = val + 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L5", "completion": "            else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L6", "completion": "                val = val - 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L7", "completion": "                if val < 0:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 24"}
+{"task_id": "SingleLineInfilling/HumanEval/119/L8", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L9", "completion": "        return val == 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L11", "completion": "    S1 = lst[0] + lst[1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L12", "completion": "    S2 = lst[1] + lst[0]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/119/L13", "completion": "\n    return 'Yes' if check(S1) or check(S2) else 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/120/L0", "completion": "    if len(arr) == 0 or k == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/120/L1", "completion": "        return []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/120/L2", "completion": "    arr.sort()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/120/L3", "completion": "    ans = arr[-k:]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/120/L4", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/121/L0", "completion": "#     return sum(x for x in lst if x % 2 != 0)\n\n    return sum(x for x in lst if x % 2 != 0)\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5, 8, 7, 1])    == 12"}
+{"task_id": "SingleLineInfilling/HumanEval/122/L0", "completion": "def add_elements(arr, k):\n    \"\"\"\n    Given a non-empty array of integers arr and an integer k, return\n    the sum of the elements with at most two digits from the first k elements of arr.\n\n    Example:\n\n        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n        Output: 24 # sum of 21 + 3\n\n    Constraints:\n        1. 1 <= len(arr) <= 100\n        2. 1 <= k <= len(arr)\n    \"\"\"\n    return sum(sorted(arr[:k], reverse=True)[:2])\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1,-2,-3,41,57,76,87,88,99], 3) == -4"}
+{"task_id": "SingleLineInfilling/HumanEval/123/L0", "completion": "    if n == 1:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(14) == [1, 5, 7, 11, 13, 17]"}
+{"task_id": "SingleLineInfilling/HumanEval/123/L1", "completion": "        odd_collatz = [n]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(14) == [1, 5, 7, 11, 13, 17]"}
+{"task_id": "SingleLineInfilling/HumanEval/123/L2", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L3", "completion": "        odd_collatz = [n]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L4", "completion": "\n    while n != 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L5", "completion": "        if n%2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L6", "completion": "            n = n//2\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L7", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L8", "completion": "            n = 3*n + 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L10", "completion": "        if n not in odd_collatz:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(14) == [1, 5, 7, 11, 13, 17]"}
+{"task_id": "SingleLineInfilling/HumanEval/123/L11", "completion": "            odd_collatz.append(n)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/123/L13", "completion": "#     print(odd_collatz)\n    return sorted(odd_collatz)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L0", "completion": "    try:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L1", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L2", "completion": "        month, day, year = date.split('-')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L3", "completion": "        month, day, year = int(month), int(day), int(year)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L4", "completion": "        if len(date) != 10:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('15-01-2012') == False"}
+{"task_id": "SingleLineInfilling/HumanEval/124/L5", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L6", "completion": "        if day < 1 or day > 31:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L7", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L8", "completion": "        if month in [4,6,9,11] and day < 1 or day > 30:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L9", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L10", "completion": "        if month == 2 and day < 1 or day > 29:\n            return False\n        if len(date) != 10:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L11", "completion": "            return False\n        if len(date) != 10:\n            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L12", "completion": "        if len(date) != 10:\n            return False\n        if not date.isdigit():\n            return False\n        if not date[2] == '-':\n            return False\n        if not date[5] == '-':\n            return False\n        if not date[8] == '-':\n            return False\n    except:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('03-11-2000') == True"}
+{"task_id": "SingleLineInfilling/HumanEval/124/L13", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/124/L15", "completion": "print(valid_date('03-11-2000'))\n", "passed": false, "kind": "assertion", "msg": "assert candidate('03-11-2000') == True"}
+{"task_id": "SingleLineInfilling/HumanEval/125/L0", "completion": "    if \" \" in txt:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/125/L1", "completion": "        return txt.split()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/125/L2", "completion": "    elif \",\" in txt:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/125/L3", "completion": "        return txt.split(\",\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/125/L4", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/125/L5", "completion": "        return [txt[i] for i in range(len(txt)) if txt[i].islower() and i%2!=0]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"abcdef\") == 3"}
+{"task_id": "SingleLineInfilling/HumanEval/126/L0", "completion": "    count_digit = [0] * 10\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L1", "completion": "    for i in lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L2", "completion": "        count_digit[i] += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L3", "completion": "    if len(lst) == len(count_digit):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5]) == True"}
+{"task_id": "SingleLineInfilling/HumanEval/126/L4", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L5", "completion": "    elif all(count_digit[i] == 2 for i in lst):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([5]) == True"}
+{"task_id": "SingleLineInfilling/HumanEval/126/L6", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L7", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/126/L8", "completion": "        return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L0", "completion": "    def is_prime(num):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L1", "completion": "        if num == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L2", "completion": "            return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L3", "completion": "        if num == 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L4", "completion": "            return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L5", "completion": "        for i in range(2, num):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L6", "completion": "            if num % i == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L7", "completion": "                return False\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L8", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L10", "completion": "    l = max(interval1[0], interval2[0])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L11", "completion": "    r = min(interval1[1], interval2[1])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L12", "completion": "    length = r - l\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L13", "completion": "    if length > 0 and is_prime(length):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L14", "completion": "        return \"YES\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/127/L15", "completion": "    else:\n        return \"NO\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/128/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate([]) == None"}
+{"task_id": "SingleLineInfilling/HumanEval/128/L1", "completion": "    prod = 1\n    for i in arr:\n        if i < 0:\n            prod *= -1\n", "passed": false, "kind": "assertion", "msg": "assert candidate([0, 1]) == 0"}
+{"task_id": "SingleLineInfilling/HumanEval/128/L2", "completion": "    return sum(map(lambda x: x * prod, arr))\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 2, 2, -4]) == -9"}
+{"task_id": "SingleLineInfilling/HumanEval/129/L0", "completion": "    n = len(grid)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L1", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L2", "completion": "    for i in range(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L3", "completion": "        for j in range(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L4", "completion": "            if grid[i][j] == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L5", "completion": "                temp = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L6", "completion": "                if i != 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L7", "completion": "                    temp.append(grid[i - 1][j])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L9", "completion": "                if j != 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L10", "completion": "                    temp.append(grid[i][j - 1])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L12", "completion": "                if i != n - 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L13", "completion": "                    temp.append(grid[i + 1][j])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L15", "completion": "                if j != n - 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L16", "completion": "                    temp.append(grid[i][j + 1])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L18", "completion": "                temp.sort()\n                val = min(val, temp[0] + temp[1])\n", "passed": false, "kind": "assertion", "msg": "assert candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) == [1, 2, 1]"}
+{"task_id": "SingleLineInfilling/HumanEval/129/L20", "completion": "    ans = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L21", "completion": "    for i in range(k):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L22", "completion": "        if val == n * n + 1:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) == [1, 2, 1]"}
+{"task_id": "SingleLineInfilling/HumanEval/129/L23", "completion": "            ans.insert(0, val)\n", "passed": false, "kind": "assertion", "msg": "assert candidate([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) == [1, 2, 1]"}
+{"task_id": "SingleLineInfilling/HumanEval/129/L24", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/129/L25", "completion": "            ans.append(val)\n            val += 1\n", "passed": false, "kind": "assertion", "msg": "assert candidate([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]], 4) == [1, 2, 1, 2]"}
+{"task_id": "SingleLineInfilling/HumanEval/129/L26", "completion": "\n    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/130/L0", "completion": "    if n == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/130/L1", "completion": "        return []\n", "passed": false, "kind": "assertion", "msg": "assert candidate(0) == [1]"}
+{"task_id": "SingleLineInfilling/HumanEval/130/L2", "completion": "    if n == 1:\n        return [1, 1]\n    my_tri = [1, 1]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3) == [1, 3, 2.0, 8.0]"}
+{"task_id": "SingleLineInfilling/HumanEval/130/L3", "completion": "    for i in range(2, n + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/130/L4", "completion": "        if i % 2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/130/L5", "completion": "            my_tri.append(my_tri[i - 1] + my_tri[i - 2])\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3) == [1, 3, 2.0, 8.0]"}
+{"task_id": "SingleLineInfilling/HumanEval/130/L6", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/130/L7", "completion": "            my_tri.append(i)\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3) == [1, 3, 2.0, 8.0]"}
+{"task_id": "SingleLineInfilling/HumanEval/130/L8", "completion": "    return my_tri\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L0", "completion": "    product = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L1", "completion": "    odd_count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L2", "completion": "    for digit in str(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L3", "completion": "        int_digit = int(digit)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L4", "completion": "        if int_digit%2 == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L5", "completion": "            product *= int_digit\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L6", "completion": "            odd_count += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L7", "completion": "    if odd_count == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L8", "completion": "        return 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L9", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/131/L10", "completion": "        return product\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L0", "completion": "    opening_bracket_index = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L1", "completion": "    closing_bracket_index = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L2", "completion": "    for i in range(len(string)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L3", "completion": "        if string[i] == '[':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L4", "completion": "            opening_bracket_index.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L5", "completion": "        elif string[i] == ']':\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L6", "completion": "            closing_bracket_index.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L7", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate('[][]') == False"}
+{"task_id": "SingleLineInfilling/HumanEval/132/L8", "completion": "    cnt = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L9", "completion": "    i = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L10", "completion": "    l = len(opening_bracket_index)\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/132/L11", "completion": "    for idx in opening_bracket_index:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L12", "completion": "        while i < l and closing_bracket_index[i] < idx:\n", "passed": false, "kind": "assertion", "msg": "assert candidate('[[]]') == True, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L13", "completion": "            cnt += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L14", "completion": "        i += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/132/L15", "completion": "        else:\n            return False\n    return True\n", "passed": false, "kind": "assertion", "msg": "assert candidate(('[]')) == False"}
+{"task_id": "SingleLineInfilling/HumanEval/133/L0", "completion": "    import math\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/133/L1", "completion": "    squared = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/133/L2", "completion": "    for i in lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/133/L3", "completion": "        squared += math.pow(i, 2)\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1.4,4.2,0])==29, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/133/L4", "completion": "    return squared\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/134/L1", "completion": "    check = txt.split()[-1]\n", "passed": false, "kind": "exception", "msg": "IndexError: list index out of range"}
+{"task_id": "SingleLineInfilling/HumanEval/134/L2", "completion": "#     print(check)\n    if check[-1].isalpha() and not check[-1].isspace():\n        return True\n    else:\n        return False\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"apple\") == False"}
+{"task_id": "SingleLineInfilling/HumanEval/135/L0", "completion": "    ind=-1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/135/L1", "completion": "    i=1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/135/L2", "completion": "    while i<len(arr):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/135/L3", "completion": "      if arr[i-1]>=arr[i]:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/135/L4", "completion": "        ind=i-1\n        break\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1,2,4,3,5])==3"}
+{"task_id": "SingleLineInfilling/HumanEval/135/L5", "completion": "        break\n      i+=1\n", "passed": false, "kind": "assertion", "msg": "assert candidate([4,8,5,7,3])==4"}
+{"task_id": "SingleLineInfilling/HumanEval/135/L6", "completion": "    return ind\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/136/L0", "completion": "    smallest = list(filter(lambda x: x < 0, lst))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/136/L1", "completion": "    largest = list(filter(lambda x: x > 0, lst))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/136/L2", "completion": "    if len(smallest) == 0:\n        smallest = None\n    if len(largest) == 0:\n        largest = None\n    return (max(smallest), min(largest))\n", "passed": false, "kind": "exception", "msg": "TypeError: 'NoneType' object is not iterable"}
+{"task_id": "SingleLineInfilling/HumanEval/137/L0", "completion": "    temp_a = a\n    temp_b = b\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/137/L1", "completion": "    if isinstance(temp_a, str): temp_a = temp_a.replace(',','.')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/137/L2", "completion": "    if isinstance(temp_b, str): temp_b = temp_b.replace(',','.')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/137/L3", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"1\", 1) == None"}
+{"task_id": "SingleLineInfilling/HumanEval/137/L4", "completion": "    if float(temp_a) > float(temp_b): return temp_a\n    return temp_b\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1, \"2,3\") == \"2,3\""}
+{"task_id": "SingleLineInfilling/HumanEval/138/L0", "completion": "def test_is_equal_to_sum_even():\n    assert is_equal_to_sum_even(4) == False\n    assert is_equal_to_sum_even(6) == False\n    assert is_equal_to_sum_even(8) == True\n    assert is_equal_to_sum_even(10) == True\n    assert is_equal_to_sum_even(12) == True\n    assert is_equal_to_sum_even(14) == True\n    assert is_equal_to_sum_even(16) == True\n    assert is_equal_to_sum_even(18) == True\n    assert is_equal_to_sum_even(20) == True\n    assert is_equal_to_sum_even(22) == True\n    assert is_equal_to_sum_even(24) == True\n    assert is_equal_to_sum_even(26) == True\n    assert is_equal_to_sum_even(28) == True\n    assert is_equal_to_sum_even(30) == True\n    assert is_equal_to_sum_even(32) == True\n    assert is_equal_to_sum_even(34) == True\n    assert is_equal_to_sum_even(36) == True\n    assert is_equal_to_sum_even(38) == True\n    assert is_equal_to_sum_even(40) == True\n    assert is\n", "passed": false, "kind": "syntax", "msg": "SyntaxError: invalid syntax"}
+{"task_id": "SingleLineInfilling/HumanEval/139/L0", "completion": "    fact_i = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/139/L1", "completion": "    special_fact = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/139/L2", "completion": "    for i in range(1, n + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/139/L3", "completion": "        fact_i *= i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/139/L4", "completion": "        special_fact *= fact_i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/139/L5", "completion": "    return special_fact\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L0", "completion": "    new_text = \"\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L1", "completion": "    i = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L2", "completion": "    start, end = 0, 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L3", "completion": "    while i < len(text):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L4", "completion": "        if text[i] == \" \":\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L5", "completion": "            end = i\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Mudasir Hanif \") == \"Mudasir_Hanif_\", \"This prints if this assert fails 2 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L6", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L7", "completion": "            if end - start > 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L8", "completion": "                new_text += \"-\"*(end - start)+text[i]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Exa   mple\") == \"Exa-mple\", \"This prints if this assert fails 4 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L9", "completion": "            elif end - start > 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L10", "completion": "                new_text += \"_\"+text[i]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Yellow Yellow  Dirty  Fellow\") == \"Yellow_Yellow__Dirty__Fellow\", \"This prints if this assert fails 3 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L11", "completion": "            else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L12", "completion": "                new_text += text[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L13", "completion": "            start = end\n            end = i\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"Example\") == \"Example\", \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L14", "completion": "        i += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L15", "completion": "    if end - start > 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L16", "completion": "        new_text += \"-\"+text[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L17", "completion": "    elif end - start > 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L18", "completion": "        new_text += \"_\"*(end - start)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/140/L19", "completion": "    return new_text\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L0", "completion": "    suf = ['txt', 'exe', 'dll']\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L1", "completion": "    lst = file_name.split('.')\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L2", "completion": "    if len(lst) != 2:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L3", "completion": "        return 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L4", "completion": "    if lst[1] not in suf:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L5", "completion": "        return 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L6", "completion": "    if len(lst[0]) == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L7", "completion": "        return 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L8", "completion": "    if not lst[0][0].isalpha():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L9", "completion": "        return 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L10", "completion": "    t = 0\n    for i in lst[0]:\n        if i.isdigit():\n            t += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L11", "completion": "    if t > 3:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L12", "completion": "        return 'No'\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/141/L13", "completion": "#     if not lst[0][1].isalpha():\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"example.txt\") == 'Yes'"}
+{"task_id": "SingleLineInfilling/HumanEval/142/L0", "completion": "    result = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L1", "completion": "    for i in range(len(lst)):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L2", "completion": "        if i % 4 == 0 and i%3 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([-1,-1,-1,-1,-1,-1,-1,-1,-1]) == -3"}
+{"task_id": "SingleLineInfilling/HumanEval/142/L3", "completion": "            result.append(lst[i]**2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L4", "completion": "        elif i %4 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L5", "completion": "            result.append(lst[i]**3)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L6", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L7", "completion": "            result.append(lst[i])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/142/L8", "completion": "    return sum(result)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L0", "completion": "    new_lst = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L1", "completion": "    for word in sentence.split(\" \"):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L2", "completion": "        flg = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L3", "completion": "        if len(word) == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L4", "completion": "            new_lst.append(word)\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"This is a test\") == \"is\""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L5", "completion": "        for i in range(2, int(len(word)**0.5)+1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L6", "completion": "            if word[0] == word[i]:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"This is a test\") == \"is\""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L7", "completion": "                flg = 1\n                break\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L8", "completion": "        if flg == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L9", "completion": "            new_lst.append(word)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/143/L10", "completion": "    return ' '.join(new_lst)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L0", "completion": "    a, b = x.split(\"/\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L1", "completion": "    c, d = n.split(\"/\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L2", "completion": "    numerator = int(a) * int(c)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L3", "completion": "    denom = int(b) * int(d)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L4", "completion": "    if numerator == denom:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"5/1\", \"3/1\") == True, 'test3'"}
+{"task_id": "SingleLineInfilling/HumanEval/144/L5", "completion": "        return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/144/L6", "completion": "print(simplify(\"1/5\", \"5/1\"))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"1/6\", \"2/1\") == False, 'test2'"}
+{"task_id": "SingleLineInfilling/HumanEval/145/L0", "completion": "    def digits_sum(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/145/L1", "completion": "        neg = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/145/L2", "completion": "        if n < 0:\n            neg = -1\n", "passed": false, "kind": "exception", "msg": "ValueError: invalid literal for int() with base 10: '-'"}
+{"task_id": "SingleLineInfilling/HumanEval/145/L3", "completion": "\n", "passed": false, "kind": "exception", "msg": "TypeError: 'int' object is not subscriptable"}
+{"task_id": "SingleLineInfilling/HumanEval/145/L4", "completion": "        n = [i * neg for i in n]\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]"}
+{"task_id": "SingleLineInfilling/HumanEval/145/L5", "completion": "        return sum(n)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/145/L6", "completion": "#         return sum([int(i) for i in str(n)])\n\n    return sorted(nums, key=digits_sum)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L1", "completion": "    count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L2", "completion": "    for num in nums:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L3", "completion": "        if num > 10:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L4", "completion": "\n", "passed": false, "kind": "exception", "msg": "NameError: name 'odd_digits' is not defined"}
+{"task_id": "SingleLineInfilling/HumanEval/146/L5", "completion": "            number_as_string = str(num)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L6", "completion": "            if int(number_as_string[0]) % 2 == 1 and int(number_as_string[-1]) % 2 == 1 and int(number_as_string[0]) not in odd_digits and int(number_as_string[-1]) not in odd_digits:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([15, -73, 14, -15]) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/146/L7", "completion": "                count += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/146/L9", "completion": "    return count\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L0", "completion": "    A = [i*i-i+1 for i in range(1,n+1)]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L1", "completion": "    ans = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L2", "completion": "    for i in range(n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L3", "completion": "        for j in range(i+1,n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L4", "completion": "            for k in range(j+1,n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L5", "completion": "                if A[i] + A[j] + A[k] % 3 == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(5) == 1"}
+{"task_id": "SingleLineInfilling/HumanEval/147/L6", "completion": "                    ans.append((A[i],A[j],A[k]))\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/147/L7", "completion": "    return len(ans)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L0", "completion": "    planet_names = (\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\")\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L1", "completion": "    if planet1 not in planet_names or planet2 not in planet_names:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L2", "completion": "        return ()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L3", "completion": "    planet1_index = planet_names.index(planet1)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L4", "completion": "    planet2_index = planet_names.index(planet2)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L5", "completion": "    if planet1_index < planet2_index:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L6", "completion": "        return (planet_names[planet1_index + 1 : planet2_index])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L7", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/148/L8", "completion": "        return (planet_names[planet2_index + 1: planet1_index])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/149/L0", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate([\"d\", \"dcba\", \"abcd\", \"a\"]) == [\"abcd\", \"dcba\"]"}
+{"task_id": "SingleLineInfilling/HumanEval/149/L1", "completion": "    new_lst = []\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/149/L2", "completion": "    for i in lst:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/149/L3", "completion": "        if len(i) % 2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/149/L4", "completion": "            new_lst.append(i)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/149/L5", "completion": "    return new_lst\n", "passed": false, "kind": "assertion", "msg": "assert candidate(['aaaa', 'bbbb', 'dd', 'cc']) == [\"cc\", \"dd\", \"aaaa\", \"bbbb\"]"}
+{"task_id": "SingleLineInfilling/HumanEval/150/L0", "completion": "    if n == 1:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/150/L1", "completion": "        return x\n", "passed": false, "kind": "assertion", "msg": "assert candidate(1, 2, 0) == 0"}
+{"task_id": "SingleLineInfilling/HumanEval/150/L2", "completion": "    for i in range(2, n):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/150/L3", "completion": "        if n % i == 0:\n            if i == n - 1:\n", "passed": false, "kind": "syntax", "msg": "IndentationError: expected an indented block after 'if' statement on line 15"}
+{"task_id": "SingleLineInfilling/HumanEval/150/L4", "completion": "\n", "passed": false, "kind": "assertion", "msg": "assert candidate(15, 8, 5) == 5"}
+{"task_id": "SingleLineInfilling/HumanEval/150/L5", "completion": "\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/150/L6", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/150/L7", "completion": "        return x\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/151/L0", "completion": "#     if len(lst) == 0:\n", "passed": false, "kind": "assertion", "msg": "assert candidate([]) == 0 , \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/152/L0", "completion": "#     if len(game) != len(guess):\n", "passed": false, "kind": "assertion", "msg": "assert candidate([1,2,3,4,5,1],[1,2,3,4,2,-2])==[0,0,0,0,3,3], \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L0", "completion": "\n", "passed": false, "kind": "exception", "msg": "UnboundLocalError: cannot access local variable 'strong' where it is not associated with a value"}
+{"task_id": "SingleLineInfilling/HumanEval/153/L1", "completion": "    my_val = len([x for x in strong if x.isalpha() and x.isupper()]) - len([x for x in strong if x.isalpha() and x.islower()])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L2", "completion": "    for s in extensions:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L3", "completion": "        val = len([x for x in s if x.isalpha() and x.isupper()]) - len([x for x in s if x.isalpha() and x.islower()])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L4", "completion": "        if val > my_val:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L5", "completion": "            strong = s\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L6", "completion": "            my_val = val\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L8", "completion": "    ans = class_name + '.' + strong\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/153/L9", "completion": "    return ans\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L0", "completion": "    l = len(b)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L1", "completion": "    pat = b + b\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L2", "completion": "    for i in range(len(a) - l + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L3", "completion": "        for j in range(len(pat) - l + 1):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L4", "completion": "            if a[i:i+l] == pat[j:j+l]:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L5", "completion": "                return True\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/154/L6", "completion": "print(cycpattern_check(\"abcd\",\"abd\"))\n", "passed": false, "kind": "assertion", "msg": "assert  candidate(\"xyzw\",\"xyw\") == False , \"test #0\""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L0", "completion": "    even_count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L1", "completion": "    odd_count = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L2", "completion": "    for i in str(num):\n", "passed": false, "kind": "exception", "msg": "ValueError: invalid literal for int() with base 10: '-'"}
+{"task_id": "SingleLineInfilling/HumanEval/155/L3", "completion": "        if int(i) % 2 == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L4", "completion": "            even_count +=1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L5", "completion": "        else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L6", "completion": "            odd_count +=1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/155/L7", "completion": "    return (even_count, odd_count)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L0", "completion": "    num = [1, 4, 5, 9, 10, 40, 50, 90,\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L1", "completion": "           100, 400, 500, 900, 1000]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L2", "completion": "    sym = [\"I\", \"IV\", \"V\", \"IX\", \"X\", \"XL\",\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L3", "completion": "           \"L\", \"XC\", \"C\", \"CD\", \"D\", \"CM\",  \n           \"M\"]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L4", "completion": "    i = len(num) - 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L5", "completion": "    res = \"\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L6", "completion": "    while number > 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L7", "completion": "        div = number // num[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L8", "completion": "        number -= div * num[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L9", "completion": "        while div:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L10", "completion": "            res += sym[i]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L11", "completion": "            div -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L12", "completion": "        i -= 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/156/L13", "completion": "    return res\n", "passed": false, "kind": "assertion", "msg": "assert candidate(19) == 'xix'"}
+{"task_id": "SingleLineInfilling/HumanEval/157/L0", "completion": "#     if a + b <= c or a + c <= b or b + c <= a:\n", "passed": false, "kind": "assertion", "msg": "assert candidate(3, 4, 5) == True, \"This prints if this assert fails 1 (good for debugging!)\""}
+{"task_id": "SingleLineInfilling/HumanEval/158/L0", "completion": "#     words = words.split()\n", "passed": false, "kind": "assertion", "msg": "assert (candidate([\"name\", \"of\", \"string\"]) == \"string\"), \"t1\""}
+{"task_id": "SingleLineInfilling/HumanEval/159/L0", "completion": "    if remaining >= need:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/159/L1", "completion": "        return [ number + need , remaining - need]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/159/L2", "completion": "    else:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/159/L3", "completion": "        return [ number + remaining , 0 ]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/160/L0", "completion": "    expression = str(operand[0])\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/160/L1", "completion": "    for oprt, oprn in zip(operator, operand[1:]):\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/160/L2", "completion": "        expression = f\"{expression} {oprt} {oprn}\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/160/L3", "completion": "#         print(expression)\n    return eval(expression)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L0", "completion": "    flg = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L1", "completion": "    idx = 0\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L2", "completion": "    new_str = list(s)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L3", "completion": "    for i in s:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L4", "completion": "        if i.isalpha():\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L5", "completion": "            if i.islower():\n                new_str[idx] = new_str[idx].upper()\n            else:\n                new_str[idx] = new_str[idx].lower()\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L6", "completion": "            flg = 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L7", "completion": "        idx += 1\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L8", "completion": "    s = \"\"\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L9", "completion": "    for i in new_str:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L10", "completion": "        s += i\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L11", "completion": "    if flg == 0:\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L12", "completion": "        s = s[::-1]\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/161/L13", "completion": "print(solve(\"1234\"))\n", "passed": false, "kind": "assertion", "msg": "assert candidate(\"AsDf\") == \"aSdF\""}
+{"task_id": "SingleLineInfilling/HumanEval/162/L0", "completion": "    import hashlib\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/162/L1", "completion": "    return hashlib.md5(text.encode('utf-8')).hexdigest()\n", "passed": false, "kind": "assertion", "msg": "assert candidate('') == None"}
+{"task_id": "SingleLineInfilling/HumanEval/163/L0", "completion": "    lower = min(a, b)\n", "passed": true, "kind": "ok", "msg": ""}
+{"task_id": "SingleLineInfilling/HumanEval/163/L1", "completion": "    upper = min(a, b)\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\""}
+{"task_id": "SingleLineInfilling/HumanEval/163/L3", "completion": "#     return [i for i in range(lower, upper + 1) if i % 2 == 0]\n    return [i for i in range(lower, upper + 1)]\n", "passed": false, "kind": "assertion", "msg": "assert candidate(2, 10) == [2, 4, 6, 8], \"Test 1\""}

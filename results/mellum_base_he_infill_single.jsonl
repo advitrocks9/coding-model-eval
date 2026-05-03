@@ -1,0 +1,1 @@
+{"task_id": "SingleLineInfilling/HumanEval/0/L0", "completion": "    for idx, elem in enumerate(numbers):\n", "passed": true, "kind": "ok", "msg": ""}
