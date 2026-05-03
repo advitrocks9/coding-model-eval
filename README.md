@@ -11,8 +11,10 @@ I picked Mellum-4b because JetBrains released three variants of it
 (base, SFT-on-Python, DPO-on-Python). Same architecture, same
 pre-training, three post-training stages. That's the cleanest
 in-the-wild lever I could pull. Then I added EvalPlus's augmented
-test suite, a multi-turn retry loop, a no-hint ablation, and a
-regression test that flips the framing on multi-turn.
+test suite, a multi-turn retry loop, a no-hint ablation, a regression
+test that flips the framing on multi-turn, OpenAI's HumanEval-Infilling
+to score Mellum on what it's actually trained for, and a cross-family
+check on DeepSeek-Coder-1.3B (base + instruct).
 
 ## Headline
 
@@ -27,7 +29,33 @@ Mellum-SFT, 15 for DPO, 41 for DeepSeek-base, 90 for DeepSeek-instruct.
 | Mellum-4b-base (FIM tokens) | 23.8% [17.9, 30.8] | 20.7% [15.2, 27.6] | – | – | – |
 | Mellum-4b-sft-python | 18.3% [13.1, 24.9] | 15.9% [11.1, 22.2] | 17.1% [12.1, 23.6] | **22.6% [16.7, 29.7]** | 8/26 = 30.8% [16.5, 50.0] |
 | Mellum-4b-dpo-python | 11.0% [7.1, 16.7] | 9.1% [5.6, 14.5] | 9.8% [6.1, 15.3] | – | 4/15 = 26.7% [10.9, 52.0] |
-| DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 28.0% [21.7, 35.4] | – | 1/41 = 2.4% [0.4, 12.6] |
+| DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 28.0% [21.7, 35.4] | 37.2% [30.2, 44.7] | 1/41 = 2.4% [0.4, 12.6] |
+| DeepSeek-Coder-1.3B-instruct | 57.3% [49.7, 64.6] | 54.9% [47.2, 62.3] | 63.4% [55.8, 70.4] | 67.1% [59.6, 73.8] | 4/90 = 4.4% [1.7, 10.9] |
+
+### Mellum's FIM benchmark — post-training direction reverses
+
+JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM,
+HumanEval-Infilling), not HumanEval. The HumanEval table above is
+the wrong axis for this family. So I ran the OpenAI
+HumanEval-Infilling single-line benchmark (1033 tasks) on the same
+three models:
+
+| | HumanEval+ pass@1 | HumanEval-Infilling pass@1 |
+|---|---:|---:|
+| Mellum-4b-base | 21.3% | 76.9% [74.2, 79.3] |
+| Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] |
+| Mellum-4b-dpo-python | 9.1% | **81.9% [79.4, 84.1]** |
+
+Same model, two benchmarks, opposite signs across the post-training
+axis. Each post-training stage *hurts* HumanEval (24.4 → 18.3 → 11.0)
+and *helps* FIM (76.9 → 80.8 → 81.9). The Mellum paper reports 80.45%
+on HumanEval-Infilling for Mellum-base; my pipeline lands at 76.9%
+(small gap is prompt-format details). The same Mellum-DPO that
+scores 9.1% on HumanEval+ scores 81.9% on HumanEval-Infilling — 9×
+difference on the same model, picked apart by which benchmark you
+grade with. This is the direct measurement behind the "Mellum's
+HumanEval pass@1 understates the model" framing.
+
 
 CIs matter for recovery: with-hint recovery on Mellum-SFT is 1.4%
 [0.4, 5.1]; no-hint recovery is 8.0% [4.5, 13.7]. The intervals don't
@@ -281,10 +309,58 @@ already-passing tasks. Both are answering "what does this hint do
 to the model under deployment-shape conditions," but the recovery
 number is the model's best chance under realistic retry pressure,
 and the regression number is a conservative stress test under one
-fabricated trigger. The right next step is a no-hint retry
-control on the same 26 passing tasks, which would isolate
-hint-induced damage from damage caused by stochastic retrying
-itself — `scripts/run_regression_nohint.py` runs that.
+fabricated trigger.
+
+### The no-hint regression control narrows the claim
+
+`scripts/run_regression_nohint.py` runs the regression test with
+the hint stripped — same passing tasks, same retry budget, same
+T=0.6 sampling, no fabricated hint. The point is to isolate
+"hint-induced damage" from "stochastic-retry damage on a from-scratch
+problem". Numbers on the same passing-task denominator as each
+model's with-hint regression:
+
+| | with current hint | no-hint control | hint marginal |
+|---|---:|---:|---:|
+| Mellum-SFT (n=26) | 30.8% | 26.9% | **+3.8 pp** |
+| Mellum-DPO (n=15) | 26.7% | 33.3% | -6.7 pp |
+| DS-Coder-instruct (n=90) | 4.4% | 22.2% | -17.8 pp |
+
+So most of what looked like hint-induced damage is just stochastic
+retry damage on a from-scratch problem (sampled retry breaks
+22-33% of correct answers in three of four models even with no
+hint). The hint's *marginal* effect, after subtracting the
+stochastic baseline, is +3.8 pp on Mellum-SFT (the only positive
+sign) and stabilising on the other models. So the hint is not
+generically poisonous; it's specifically poisonous to Mellum-SFT,
+and on every other model it actually anchors sampled retries.
+That's a sharper version of the cross-family claim.
+
+### Canonical-solution poisoning: shared-task assay
+
+Each model's regression denominator is different (Mellum-SFT
+n=26, DS-instruct n=90), which is the right thing to ask in
+deployment but conflates "models pass different tasks" with "models
+react to hints differently". The shared-task version: give every
+model the *same* canonical HumanEval solution as the "previous
+attempt" plus the wrong-hint, run the same greedy regeneration on
+all 164 tasks. Pass-after vs natural single-turn pass@1:
+
+| | natural | with canonical context | lift |
+|---|---:|---:|---:|
+| Mellum-DPO | 9.1% | 12.8% | +3.7 pp |
+| Mellum-SFT | 15.9% | 31.1% | +15.2 pp |
+| DS-Coder-instruct | 54.9% | 72.6% | +17.7 pp |
+| DS-Coder-base | 25.0% | 57.3% | **+32.3 pp** |
+
+DS-base imitates the demonstration most aggressively — given a
+correct solution above the prompt and the "wrong, try again"
+flag, it just emits something close to the canonical 57% of the
+time, more than doubling its single-turn pass rate. Mellum-DPO
+resists the most: only +3.7 pp lift. Reading: DPO has steered
+Mellum-DPO away from raw imitation more than SFT did. (Same axis
+as the regression-rate finding — DPO is slightly less hint-sensitive
+than SFT — but in the opposite direction here.)
 
 ## What's in here
 
