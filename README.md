@@ -17,11 +17,11 @@ Pass@1 with Wilson 95% intervals. n=164 single-turn, 138 retries (Mellum-SFT fai
 | DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 28.0% [21.7, 35.4] | 37.2% [30.2, 44.7] | 1/41 = 2.4% [0.4, 12.6] |
 | DeepSeek-Coder-1.3B-instruct | 57.3% [49.7, 64.6] | 54.9% [47.2, 62.3] | 63.4% [55.8, 70.4] | 67.1% [59.6, 73.8] | 4/90 = 4.4% [1.7, 10.9] |
 
-Sandbox-correctness check: I ran the official `evalplus.evaluate` CLI on the Mellum-SFT completions and on the DS-instruct completions in `results/`. Mellum-SFT matches exactly (18.3% / 15.9%). DS-instruct matches on base (57.3%) and disagrees on 2 of 164 plus tests, +1 -1 (54.9% me vs 54.3% theirs). The two diffs are HumanEval/39 (I score plus-pass, EvalPlus scores plus-fail) and HumanEval/92 (the reverse). Both files committed at `results/_evalplus_crosscheck_*.json`. The pass/fail bookkeeping isn't off in any way that would change the headline.
+Sandbox-correctness cross-check: I ran the official `evalplus.evaluate` CLI on the Mellum-SFT completions and on the DS-instruct completions in `results/`. Mellum-SFT matches exactly (18.3% / 15.9%). DS-instruct matches on base (57.3%) and disagrees on 2 of 164 plus tests in opposite directions: HumanEval/39 (I score plus-pass, EvalPlus scores plus-fail) and HumanEval/92 (the reverse). Net 54.9% me vs 54.3% theirs. Both crosscheck JSONs are committed at `results/_evalplus_crosscheck_*.json`.
 
 ### The benchmark choice does more work than the model choice
 
-JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infilling), not HumanEval. The HumanEval table above is the wrong axis. I ran the OpenAI HumanEval-Infilling single-line benchmark on the post-trained Mellums and on both DeepSeeks, and added MBPP+ as a third format:
+JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infilling), not HumanEval; the HumanEval table above is the format the model is least trained for. To see whether moving to the format Mellum was actually trained for flips the ordering, I ran the OpenAI HumanEval-Infilling single-line benchmark on the post-trained Mellums and on both DeepSeeks, and added MBPP+ as a third format:
 
 | | HumanEval+ | HumanEval-Infilling | MBPP+ |
 |---|---:|---:|---:|
