@@ -138,6 +138,31 @@ Five things worth noticing.
    natural-language hints are about a wash. Estimand is conditional
    recovery on the 138 single-turn failures, T=0.6 retries, paired
    by task. Replicable from `scripts/analyze_hint_sweep.py`.
+
+   **Cross-family check on the same hint sweep, DS-Coder-1.3B-instruct
+   on its 74 failed tasks (paired):**
+
+   | format | DS-instruct recovery | Mellum-SFT recovery |
+   |---|---:|---:|
+   | post | 8/74 = 10.8% | 0/138 = 0.0% |
+   | current | 14/74 = 18.9% | 2/138 = 1.4% |
+   | traceback | 16/74 = 21.6% | 6/138 = 4.3% |
+   | no hint | 20/74 = 27.0% | 11/138 = 8.0% |
+   | minimal | 23/74 = 31.1% | 7/138 = 5.1% |
+
+   Paired McNemar (Holm-corrected, family of 4 vs no-hint, n=74):
+   post p_holm=0.017 \*, current/traceback/minimal NS. So **the
+   "post format hurts retries" finding generalises** to a chat-tuned
+   different-family model — the only one of the four contrasts that
+   stays significant on DS-instruct is also the only one that stayed
+   significant on Mellum-SFT. The verbose code-comment-block
+   placement after the prompt is the load-bearing harm; the
+   minimal-vs-no-hint and traceback-vs-no-hint differences don't
+   replicate at this n. (Also worth noticing: minimal hint on
+   DS-instruct sits *above* no-hint, 31.1 vs 27.0; on Mellum-SFT it
+   sits *below*, 5.1 vs 8.0. Same hint, opposite direction across
+   families. NS within each family at this n, but the cross-family
+   sign flip is the right next experiment to formalise.)
 4. **The retry hint also breaks correct solutions.** Take the 26
    tasks the model already passes, fabricate a "previous attempt was
    wrong" hint, regenerate. 8/26 = 30.8% break. Greedy decoding,
