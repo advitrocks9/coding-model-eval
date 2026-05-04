@@ -17,9 +17,11 @@ _TRUNC_PATTERNS = (
 
 
 def _load_tokenizer(model_path: str):
-    # transformers 5.x picks the wrong pre_tokenizer for some BPE configs
-    # (DeepSeek-Coder ships a tokenizer.json that gets misread as sentencepiece).
-    # round-trip a sentinel; if it loses whitespace, load tokenizer.json raw.
+    # AutoTokenizer's BPE path occasionally picks a pre_tokenizer that drops
+    # whitespace on round-trip; this hit me on DeepSeek-Coder. The first
+    # DeepSeek-base run produced 0/164 because the model was being shown
+    # text without spaces. Round-trip a sentinel; if whitespace doesn't
+    # survive, bypass AutoTokenizer and load tokenizer.json directly.
     tok = AutoTokenizer.from_pretrained(model_path)
     sentinel = "def f(x):\n    return x"
     if tok.decode(tok.encode(sentinel, add_special_tokens=False)) == sentinel:
