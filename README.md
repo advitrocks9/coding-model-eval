@@ -54,11 +54,13 @@ For comparison, the same policy on HumanEval+ recovers 11/138 = 8.0%. Greedy-the
 | strategy | pass@1 | what it does |
 |---|---:|---|
 | single-turn greedy | 15.9% | one greedy completion |
-| pass@3 sampled at T=0.6 | 18.8% | three independent samples, no retry mechanism |
+| pass@3 sampled at T=0.6 | 18.3% | three independent samples, no retry mechanism |
 | multi-turn with hint (3 attempts) | 17.1% | greedy then up to 2 sampled retries with comment-block hint |
 | **multi-turn no hint (3 attempts)** | **22.6%** | greedy then up to 2 sampled retries, no hint, just resample |
 
-Sampling beats greedy (+2.9 pp), greedy-anchored sampling beats free sampling (+3.8 pp), and adding the hint to retries claws back 5.5 pp of that gain. Greedy turn 0 captures a high-mass mode that pure sampling at T=0.6 misses.
+The pass@3 row was originally a 4-sample run reused under the unbiased estimator. The committed `results/mellum_sft_passk.jsonl` is `n_samples=4`, which is not actually compute-matched at 3 generations. `scripts/recompute_passk_at_3.py` reads that file, takes only samples [0:3] per task, and computes pass@3 via the codex unbiased estimator (`1 - C(n-c, k)/C(n, k)` at `n=3, k=3`); output at `results/mellum_sft_passk_at_3.jsonl`. The 18.3% in the table is that recomputed number, not the 4-sample original (18.8%).
+
+Sampling beats greedy (+2.4 pp), greedy-anchored sampling beats free sampling (+4.3 pp), and adding the hint to retries claws back 5.5 pp of that gain. Greedy turn 0 captures a high-mass mode that pure sampling at T=0.6 misses.
 
 T=0.6 is the EvalPlus sampling temperature; I picked it from precedent. The repo also has a small calibration on 8 tasks at T in {0.2, 0.6, 1.0} (n=32 per arm: 13/32, 14/32, 11/32). At that sample size T=0.6 isn't statistically distinguishable from T=0.2; it's a tie-broken-by-precedent, not a measured peak.
 
@@ -165,7 +167,8 @@ PYTHONPATH=. uv run python scripts/run_singleturn.py        $M/mellum-sft-python
 PYTHONPATH=. uv run python scripts/run_multiturn.py         $M/mellum-sft-python mellum_sft   # ~45 min
 PYTHONPATH=. uv run python scripts/run_multiturn_nohint.py  $M/mellum-sft-python mellum_sft   # ~30 min
 PYTHONPATH=. uv run python scripts/run_regression.py        $M/mellum-sft-python mellum_sft   # ~5 min
-PYTHONPATH=. uv run python scripts/run_passk.py             $M/mellum-sft-python mellum_sft   # ~50 min, 4 samples T=0.6
+PYTHONPATH=. uv run python scripts/run_passk.py             $M/mellum-sft-python mellum_sft 3 0.6   # ~38 min, 3 samples T=0.6 (compute-matched)
+PYTHONPATH=. uv run python scripts/recompute_passk_at_3.py  mellum_sft   # or recompute pass@3 from the 4-sample committed file
 PYTHONPATH=. uv run python scripts/run_hint_sweep.py        $M/mellum-sft-python mellum_sft   # ~90 min, 3 formats
 PYTHONPATH=. uv run python -m eval.report
 PYTHONPATH=. uv run python scripts/analyze_hint_sweep.py
