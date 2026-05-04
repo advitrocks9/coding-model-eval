@@ -32,6 +32,21 @@ Mellum-SFT, 15 for DPO, 41 for DeepSeek-base, 90 for DeepSeek-instruct.
 | DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 28.0% [21.7, 35.4] | 37.2% [30.2, 44.7] | 1/41 = 2.4% [0.4, 12.6] |
 | DeepSeek-Coder-1.3B-instruct | 57.3% [49.7, 64.6] | 54.9% [47.2, 62.3] | 63.4% [55.8, 70.4] | 67.1% [59.6, 73.8] | 4/90 = 4.4% [1.7, 10.9] |
 
+### Multi-turn-no-hint generalises to FIM (and works better there)
+
+The full multi-turn-no-hint policy on the deployment-shape benchmark.
+Take Mellum-SFT's 198 FIM single-line failures, run greedy turn 0
+(already failed) plus 2 sampled FIM retries at T=0.6, no hint.
+Recovery rate **48/198 = 24.2%**. Implied multi-turn pass goes
+80.8% → 85.5% (+4.7 pp). Recovery turn distribution: 35 at turn 1,
+13 at turn 2.
+
+For comparison, the same policy on HumanEval+ recovers 11/138 =
+8.0%. So the multi-turn-no-hint approach **recovers 3× more often
+on the FIM benchmark Mellum is actually shipped against** than on
+HumanEval+. The "greedy-then-sample" recipe holds on FIM and the
+relative lift is bigger.
+
 ### Mellum's FIM benchmark — post-training direction reverses
 
 JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM,
