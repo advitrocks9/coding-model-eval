@@ -72,14 +72,14 @@ future me doesn't undo it.
 
 ## Why this matters beyond my project
 
-Any code-eval pipeline that writes temporary scripts and runs them with
+Any code-eval harness that writes temporary scripts and runs them with
 the host interpreter has this bug latent. EvalPlus's evaluator, the
 `human-eval` package, and several public eval harnesses all dump test
 files into a temp dir and exec them. If your tmpdir happens to contain
 a Python file matching the name of any module imported by your tests,
 or by any module those tests import, all your tests fail with a
 confusing error. My sandbox is small enough that I caught it in 30
-minutes; in a larger pipeline with timeouts swallowing stderr, the
+minutes; in a larger harness with timeouts swallowing stderr, the
 silent corruption could go unnoticed for a long time.
 
 The general lesson: subprocess inherits more environment from its
@@ -88,7 +88,7 @@ and any `.pth` files in the script's directory all flow through. If the
 sandbox writes scripts to a path that anyone else can also write to, you
 have a confused-deputy bug waiting to happen.
 
-For a production eval pipeline I'd probably do all three: `-I`, write to a
+For a production eval harness I'd probably do all three: `-I`, write to a
 per-run tempdir, and assert at startup that the tempdir has no `.py`
 files in it.
 

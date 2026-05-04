@@ -35,7 +35,13 @@ Same Mellum-DPO scores 9.1% on HumanEval+ and 81.9% on HumanEval-Infilling: 9x d
 
 Within-Mellum on 1033 paired FIM tasks (paired exact McNemar): base->SFT b=55 c=96 p=0.001, base->DPO b=49 c=101 p=3e-5, SFT->DPO b=33 c=44 p=0.25. Each post-training stage adds significantly over base; the SFT->DPO additional gain is suggestive but not significant at this n. The HumanEval direction (each post-training stage hurts) is consistent across all three Mellum stages. Headline reversal (HumanEval falls, FIM rises) holds against the base, not just stage-by-stage.
 
-On MBPP+ Mellum-SFT scores 1.3%, basically zero, because MBPP+'s prompt format (docstring at the top of an empty file) is out-of-distribution for a FIM-on-Python model. *Caveat:* `eval/mbpp_loader.py` builds my own minimal docstring scaffold, not EvalPlus's canonical MBPP+ prompt. So 1.3% measures the prompt builder as much as the model. The right reading is "format-OOD upper-bound argument", not a tight measurement; a paper-matched prompt would land higher. DS-Coder, trained on more diverse data, handles all three benchmark formats.
+On MBPP+ Mellum-SFT scores 1.3%, basically zero, because MBPP+'s prompt format (docstring at the top of an empty file) is out-of-distribution for a FIM-on-Python model. *Caveat:* `eval/mbpp_loader.py` builds my own minimal docstring scaffold, not EvalPlus's canonical MBPP+ prompt; I'm treating that row as an internal probe, not a cross-model number. The right reading is "format-OOD upper-bound argument", not a tight measurement. DS-Coder, trained on more diverse data, handles the other two formats.
+
+### Decontamination
+
+HumanEval and HumanEval+ are almost certainly inside both pretraining mixes here. The Mellum model card lists HumanEval-Infilling-light as a reported metric, which means the JetBrains team treats that test set as known and reports against it; HumanEval and its variants have been on every public code-LM scrape since 2021. DeepSeek-Coder is in the same situation. I did not run a decontaminated split. So the absolute pass@1 numbers in the table above can't be read as clean out-of-distribution generalisation; they're partly a measurement of how well each model recalls the canonical solutions.
+
+The defensible claim from these numbers is benchmark-sensitivity within a fixed family. Mellum-base 24.4% vs Mellum-SFT 18.3% vs Mellum-DPO 11.0% on HumanEval+ tells you something about what each post-training stage does to the same base model on the same likely-contaminated benchmark; that's a real signal even if the absolute level is inflated. Cross-family numbers (Mellum vs DeepSeek) are weaker for the same reason: each family's contamination story is its own, and a cross-family delta mixes recall with capability. Read the headline as "X scores higher on this benchmark slice" rather than "X is better at code generation."
 
 ### Multi-turn-no-hint generalises to FIM, and works better there
 
@@ -101,7 +107,7 @@ Both with-hint Mellum points sit far below the y=x diagonal: their recovery is d
 
 ## What "regression rate" actually measures
 
-The regression test fabricates a "previous attempt was wrong" hint on tasks the model already passes and reruns the retry pipeline. What it measures is **false-negative retry sensitivity**: P(correct -> broken | retry triggered). It's not "the cost the average user pays per retry": that's `regression_rate x P(retry-triggered-when-correct)`, and the second factor is deployment-specific (an IDE that auto-retries on every TODO comment is high; a user clicking Retry is low). Even with that caveat, 30.8% on Mellum-SFT is large.
+The regression test fabricates a "previous attempt was wrong" hint on tasks the model already passes and reruns the retry loop. What it measures is **false-negative retry sensitivity**: P(correct -> broken | retry triggered). It's not "the cost the average user pays per retry": that's `regression_rate x P(retry-triggered-when-correct)`, and the second factor is deployment-specific (an IDE that auto-retries on every TODO comment is high; a user clicking Retry is low). Even with that caveat, 30.8% on Mellum-SFT is large.
 
 The minimum reportable pair for any "multi-turn helps" claim should be the recovery rate paired with the false-negative retry sensitivity, plus an estimate of how often the deployed retry trigger fires on correct outputs. The published multi-turn pass@1 number reports only the first of those three.
 
