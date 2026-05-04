@@ -31,16 +31,22 @@ MODEL_REGISTRY = {
     "ds_instruct":   "deepseek-ai/deepseek-coder-1.3b-instruct",
 }
 
+# Versions match the lockfile (uv.lock) so a Modal run resolves the same
+# wheels as `uv sync` does locally. torch is the cu128 wheel from the
+# pytorch index; the rest come from PyPI.
 image = (
     modal.Image.debian_slim(python_version="3.12")
     .pip_install(
-        "torch>=2.4",
-        "transformers>=4.45",
-        "tokenizers>=0.20",
-        "accelerate>=0.34",
-        "datasets>=3.0",
-        "tqdm",
-        "huggingface-hub",
+        "torch==2.11.0+cu128",
+        extra_options="--extra-index-url https://download.pytorch.org/whl/cu128",
+    )
+    .pip_install(
+        "transformers==5.7.0",
+        "tokenizers==0.22.2",
+        "accelerate==1.13.0",
+        "datasets==4.8.5",
+        "huggingface-hub==1.12.2",
+        "tqdm==4.67.3",
     )
     .add_local_dir(str(REPO / "eval"), "/repo/eval")
     .add_local_dir(str(REPO / "scripts"), "/repo/scripts")
