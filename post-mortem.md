@@ -58,10 +58,11 @@ as the `inspect` module. Numpy's call to `inspect.cleandoc` then raises
 proc = subprocess.run([sys.executable, "-I", str(tmp)], ...)
 ```
 
-`python -I` is "isolated mode" (PEP 432, available since 3.4). It does
-several things; the load-bearing one here is that it does **not** prepend
-the script's directory to `sys.path`. With `-I`, the subprocess can't see
-`/tmp/inspect.py`, or any other shadowing file in the script's directory.
+`python -I` is "isolated mode" (added in Python 3.4 via the work that
+also produced `python -E` and `-s`). It does several things; the one I
+wanted here is that it does **not** prepend the script's directory to
+`sys.path`. With `-I`, the subprocess can't see `/tmp/inspect.py`, or
+any other shadowing file in the script's directory.
 
 I could also have written the test scripts to a private subdirectory
 created per-run, or run them through `python -m` and a fixed import,
@@ -109,7 +110,7 @@ files in it.
 ## Takeaway for the project
 
 Single line change to the sandbox, half a paragraph of explanation in a
-code comment. The bug is mostly interesting because of the lesson about
-subprocess sandboxes, not because of the fix. I'm leaving this writeup
-in the repo because future-me will absolutely write `/tmp/foo.py` again
-and forget that this is a thing.
+code comment. The lesson worth remembering is about subprocess sandboxes,
+not the fix itself. I'm leaving this writeup in the repo because
+future-me will absolutely write `/tmp/foo.py` again and forget that this
+is a thing.
