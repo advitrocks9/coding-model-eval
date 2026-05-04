@@ -32,28 +32,23 @@ def load_format(fmt: str) -> dict[str, bool]:
 
 
 def mcnemar(b: int, c: int) -> tuple[float, float]:
-    """Return (chi2, p_two_sided) for paired discordant pairs (b, c).
+    """Exact two-sided McNemar p-value for paired discordant counts (b, c).
 
     b: format A passes, format B fails.
     c: format A fails, format B passes.
-    Continuity-corrected. Approximate normal for n >= 25; for tiny n
-    use the binomial form.
+    Under H0 (no difference), each discordant pair flips a fair coin, so
+    min(b, c) follows Binomial(b+c, 0.5). The exact tail is tractable for
+    any n we'll see here (largest is ~20 discordant pairs), so always
+    return the exact binomial p; chi2 is left as NaN since the
+    normal-approx isn't what's reported.
     """
     n = b + c
     if n == 0:
         return 0.0, 1.0
-    if n < 25:
-        # exact binomial test, two-sided
-        from math import comb
-        k = min(b, c)
-        p = sum(comb(n, i) for i in range(k + 1)) / (2 ** n)
-        return float("nan"), min(1.0, 2 * p)
-    chi2 = (abs(b - c) - 1) ** 2 / n
-    # rough normal-approx p; correct enough for n we care about
-    from math import erfc, sqrt
-    z = sqrt(chi2)
-    p = erfc(z / sqrt(2))
-    return chi2, p
+    from math import comb
+    k = min(b, c)
+    p = sum(comb(n, i) for i in range(k + 1)) / (2 ** n)
+    return float("nan"), min(1.0, 2 * p)
 
 
 def load_no_hint() -> dict[str, bool]:

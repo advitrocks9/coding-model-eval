@@ -4,7 +4,7 @@
 # straight from the data files.
 import json
 from itertools import combinations
-from math import comb, erfc, sqrt
+from math import comb
 from pathlib import Path
 
 from eval.report import wilson, cross_table
@@ -30,14 +30,12 @@ def fisher_exact(a: int, b: int, c: int, d: int) -> float:
 
 
 def mcnemar(b: int, c: int) -> float:
+    # Exact two-sided binomial test on the discordant pairs.
     n = b + c
     if n == 0:
         return 1.0
-    if n < 25:
-        k = min(b, c)
-        return min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / (2 ** n))
-    chi2 = (abs(b - c) - 1) ** 2 / n
-    return erfc(sqrt(chi2) / sqrt(2))
+    k = min(b, c)
+    return min(1.0, 2 * sum(comb(n, i) for i in range(k + 1)) / (2 ** n))
 
 
 def holm(pvals: list[tuple[str, float]]) -> dict[str, float]:
@@ -158,9 +156,13 @@ def benchmark_grid() -> str:
         fp = RESULTS / f"{tag}_he_infill_single.jsonl"
         if fp.exists():
             rows = [json.loads(l) for l in fp.open()]
-            k = sum(1 for r in rows if r["passed"])
-            note = "" if len(rows) == 1033 else f" (n={len(rows)})"
-            f = f"{k/len(rows):.1%}{note}"
+            if len(rows) < 50:
+                # too small to report a pass-rate against; flag rather than mislead
+                f = f"partial n={len(rows)}"
+            else:
+                k = sum(1 for r in rows if r["passed"])
+                note = "" if len(rows) == 1033 else f" (n={len(rows)})"
+                f = f"{k/len(rows):.1%}{note}"
         m = "-"
         mp = RESULTS / f"{tag}_mbpp_singleturn.jsonl"
         if mp.exists():
