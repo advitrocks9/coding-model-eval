@@ -7,9 +7,12 @@ dependencies = [
     "datasets>=3.0",
     "transformers>=4.46",
     "accelerate>=1.0",
-    "torch>=2.11",
+    "torch>=2.7",
     "tqdm>=4.66",
 ]
+
+[project.optional-dependencies]
+crosscheck = ["evalplus>=0.3"]
 
 [[tool.uv.index]]
 name = "pytorch-cu128"
