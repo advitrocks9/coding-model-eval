@@ -21,21 +21,21 @@ Sandbox-correctness cross-check: I ran the official `evalplus.evaluate` CLI on t
 
 ### The benchmark choice does more work than the model choice
 
-JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infilling), not HumanEval; the HumanEval table above is the format the model is least trained for. To see whether moving to the format Mellum was actually trained for flips the ordering, I ran the OpenAI HumanEval-Infilling single-line benchmark on the post-trained Mellums and on both DeepSeeks, and added MBPP+ as a third format:
+JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infilling), not HumanEval; the HumanEval table above is the format the model is least trained for. To see whether moving to the format Mellum was actually trained for flips the ordering, I ran the OpenAI HumanEval-Infilling single-line benchmark on the post-trained Mellums and on both DeepSeeks:
 
-| | HumanEval+ | HumanEval-Infilling | MBPP+ |
-|---|---:|---:|---:|
-| Mellum-4b-base | 21.3% | 76.9% [74.2, 79.3] (n=1033) | - |
-| Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] (n=1033) | **1.3% [0.6, 3.1]** |
-| Mellum-4b-dpo-python | 9.1% | 81.9% [79.4, 84.1] (n=1033) | - |
-| DS-Coder-1.3B-base | 25.0% | 13.0% [11.1, 15.2] (n=1033) | 22.0% [18.1, 26.4] |
-| DS-Coder-1.3B-instruct | 54.9% | 3.7% [2.7, 5.0] (n=1033) | 52.6% [47.6, 57.6] |
+| | HumanEval+ | HumanEval-Infilling |
+|---|---:|---:|
+| Mellum-4b-base | 21.3% | 76.9% [74.2, 79.3] (n=1033) |
+| Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] (n=1033) |
+| Mellum-4b-dpo-python | 9.1% | 81.9% [79.4, 84.1] (n=1033) |
+| DS-Coder-1.3B-base | 25.0% | 13.0% [11.1, 15.2] (n=1033) |
+| DS-Coder-1.3B-instruct | 54.9% | 3.7% [2.7, 5.0] (n=1033) |
 
 Same Mellum-DPO scores 9.1% on HumanEval+ and 81.9% on HumanEval-Infilling: 9x difference on the same model, picked apart by which benchmark you grade with. Post-trained Mellum vs DS-instruct on the same 1033 FIM tasks: 80.8% vs 3.7%, 22x ratio between two 1-4B-parameter families. The benchmark choice is doing more work than the model choice.
 
 Within-Mellum on 1033 paired FIM tasks (paired exact McNemar): base->SFT b=55 c=96 p=0.001, base->DPO b=49 c=101 p=3e-5, SFT->DPO b=33 c=44 p=0.25. Each post-training stage adds significantly over base; the SFT->DPO additional gain is suggestive but not significant at this n. The HumanEval direction (each post-training stage hurts) is consistent across all three Mellum stages. Headline reversal (HumanEval falls, FIM rises) holds against the base, not just stage-by-stage.
 
-On MBPP+ Mellum-SFT scores 1.3%, basically zero, because MBPP+'s prompt format (docstring at the top of an empty file) is out-of-distribution for a FIM-on-Python model. *Caveat:* `eval/mbpp_loader.py` builds my own minimal docstring scaffold, not EvalPlus's canonical MBPP+ prompt; I'm treating that row as an internal probe, not a cross-model number. The right reading is "format-OOD upper-bound argument", not a tight measurement. DS-Coder, trained on more diverse data, handles the other two formats.
+I also ran an MBPP+ probe (Mellum-SFT 1.3%, DS-Coder-base 22.0%, DS-Coder-instruct 52.6%) as a sanity check on the format-OOD story, but the prompt I feed (`eval/mbpp_loader.py`) is a minimal docstring scaffold, not EvalPlus's canonical MBPP+ prompt. So the row measures my prompt builder as much as the model and isn't comparable across runs that use the canonical prompt. I'm keeping it in the repo as an internal probe (raw JSONL at `results/*_mbpp_singleturn.jsonl`) and out of the headline benchmark table.
 
 ### Decontamination
 
