@@ -53,10 +53,10 @@ def main() -> int:
         seed_base = abs(hash(t.task_id)) % 100_000
         turns = []
         passed_now = False
+        # turn 0 (greedy FIM) already failed -- it's why this task is in `failed`.
+        # Sampled FIM retries only.
         for turn in range(1, MAX_EXTRA_TURNS + 1):
-            completion = g.fim_complete(
-                t.prompt, suffix=t.suffix, filename=f"{t.entry_point}.py"
-            ) if turn == 0 else _sampled_fim(g, t, seed_base + turn)
+            completion = _sampled_fim(g, t, seed_base + turn)
             full = t.prompt + completion + t.suffix
             r = execute(full, t.test + f"\ncheck({t.entry_point})\n", timeout=20)
             turns.append({
