@@ -25,14 +25,15 @@ JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infill
 
 | | HumanEval+ | HumanEval-Infilling | MBPP+ |
 |---|---:|---:|---:|
+| Mellum-4b-base | 21.3% | 76.9% [74.2, 79.3] (n=1033) | - |
 | Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] (n=1033) | **1.3% [0.6, 3.1]** |
 | Mellum-4b-dpo-python | 9.1% | 81.9% [79.4, 84.1] (n=1033) | - |
-| DS-Coder-1.3B-base | 25.0% | 16.3% [13.5, 19.6] (n=565, partial) | 22.0% [18.1, 26.4] |
+| DS-Coder-1.3B-base | 25.0% | 13.0% [11.1, 15.2] (n=1033) | 22.0% [18.1, 26.4] |
 | DS-Coder-1.3B-instruct | 54.9% | 3.7% [2.7, 5.0] (n=1033) | 52.6% [47.6, 57.6] |
 
 Same Mellum-DPO scores 9.1% on HumanEval+ and 81.9% on HumanEval-Infilling: 9x difference on the same model, picked apart by which benchmark you grade with. Post-trained Mellum vs DS-instruct on the same 1033 FIM tasks: 80.8% vs 3.7%, 22x ratio between two 1-4B-parameter families. The benchmark choice is doing more work than the model choice.
 
-Mellum-SFT vs Mellum-DPO on 1033 paired FIM tasks: paired exact McNemar b=33 c=44, p=0.25 (NS). The DPO-over-SFT gain is suggestive but not significant at this n. The HumanEval direction (each post-training stage hurts) is consistent across all three Mellum stages. Mellum-base FIM is missing from the table on purpose: I don't have a clean n=1033 baseline file in this repo for it, so the within-Mellum base-vs-post-trained McNemar stays unfinished. Re-running it is on the "next" list.
+Within-Mellum on 1033 paired FIM tasks (paired exact McNemar): base->SFT b=55 c=96 p=0.001, base->DPO b=49 c=101 p=3e-5, SFT->DPO b=33 c=44 p=0.25. Each post-training stage adds significantly over base; the SFT->DPO additional gain is suggestive but not significant at this n. The HumanEval direction (each post-training stage hurts) is consistent across all three Mellum stages. Headline reversal (HumanEval falls, FIM rises) holds against the base, not just stage-by-stage.
 
 On MBPP+ Mellum-SFT scores 1.3%, basically zero, because MBPP+'s prompt format (docstring at the top of an empty file) is out-of-distribution for a FIM-on-Python model. *Caveat:* `eval/mbpp_loader.py` builds my own minimal docstring scaffold, not EvalPlus's canonical MBPP+ prompt. So 1.3% measures the prompt builder as much as the model. The right reading is "format-OOD upper-bound argument", not a tight measurement; a paper-matched prompt would land higher. DS-Coder, trained on more diverse data, handles all three benchmark formats.
 
@@ -147,7 +148,7 @@ About 1300 lines of Python excluding smoke and inspection helpers.
 - **FIM-aware test mutation.** EvalPlus's mutation strategy doesn't transfer to FIM benchmarks. Mutate the *surrounding file context* AST-level (rename variables, reorder imports, add an unrelated function above) and re-evaluate against SAFIM or RepoBench.
 - **Five-format sweep on stronger models.** No-hint wins for every model in this set, but the gap shrinks with capability (5.5 pp on Mellum-SFT, 3.7 pp on DS-instruct). Worth running the same paired-McNemar five-format sweep on Qwen2.5-Coder-Instruct and StarCoder2-7B to find out whether the gap closes or flips signs.
 - **Calibrate the regression-rate trigger.** Regression rate is `P(correct -> broken | retry triggered)`. The deployed cost is that times `P(retry triggered | correct)`, which is deployment-specific. Instrument an IDE retry trigger on a Mellum deployment and measure the conditional probability in the wild.
-- **Re-run Mellum-base FIM at full n=1033** so the post-training story has a clean three-stage McNemar grid, and re-run DS-base FIM to completion past its current 565-row partial.
+- **Replace my MBPP+ prompt builder with EvalPlus's canonical prompt** and re-run Mellum-SFT/DPO on it. The 1.3% number is partly a measurement of my docstring scaffold; the right reading needs a paper-matched prompt to land properly.
 
 ## Reproducing
 
