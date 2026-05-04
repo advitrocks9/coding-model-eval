@@ -1,10 +1,20 @@
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 
 from .loaders import Task
 from .runner import Generator, build_retry_prompt
 from .sandbox import ExecResult, execute
+
+
+def _stable_seed(task_id: str) -> int:
+    # Python's builtin hash() is randomised per process unless PYTHONHASHSEED=0,
+    # which neither the repro commands nor the Modal env set. Hint vs no-hint
+    # arms run in different processes, so the original `abs(hash(task_id))`
+    # gave a different per-task seed every time and pairing across arms didn't
+    # actually hold. sha256 is stable across processes and Python versions.
+    return int(hashlib.sha256(task_id.encode()).hexdigest(), 16) % 100_000
 
 
 @dataclass(slots=True)
@@ -35,7 +45,7 @@ def run_one(
 ) -> MultiTurnResult:
     turns: list[TurnLog] = []
     prompt = task.prompt
-    seed_base = abs(hash(task.task_id)) % 100_000
+    seed_base = _stable_seed(task.task_id)
 
     for turn in range(max_extra_turns + 1):
         if turn == 0:

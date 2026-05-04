@@ -9,6 +9,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from eval.loaders import load_tasks
+from eval.multi_turn import _stable_seed
 from eval.runner import Generator
 from eval.sandbox import execute
 
@@ -37,7 +38,7 @@ def main() -> int:
     regressed = 0
     for r in tqdm(passing):
         t = by_id[r["task_id"]]
-        seed = abs(hash(t.task_id)) % 100_000 + 1
+        seed = _stable_seed(t.task_id) + 1
         retry = g.complete(t.prompt, temperature=0.6, seed=seed)
         full = t.prompt + retry
         rp = execute(full, t.test_plus + f"\ncheck({t.entry_point})\n", timeout=20)

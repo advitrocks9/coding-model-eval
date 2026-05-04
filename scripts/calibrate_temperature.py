@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 
 from eval.loaders import load_tasks
+from eval.multi_turn import _stable_seed
 from eval.runner import Generator
 from eval.sandbox import execute
 
@@ -40,7 +41,7 @@ def main() -> int:
     for T in TEMPS:
         print(f"\n--- T = {T} ---", flush=True)
         for t in tasks:
-            seed_base = abs(hash(t.task_id)) % 100_000
+            seed_base = _stable_seed(t.task_id)
             c = 0
             for s in range(N_SAMPLES):
                 completion = g.complete(t.prompt, temperature=T, seed=seed_base + s)

@@ -8,6 +8,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from eval.loaders import load_tasks
+from eval.multi_turn import _stable_seed
 from eval.runner import Generator
 from eval.sandbox import execute
 
@@ -42,7 +43,7 @@ def main() -> int:
     t0 = time.time()
     correct_counts: list[int] = []
     for t in tqdm(tasks):
-        seed_base = abs(hash(t.task_id)) % 100_000
+        seed_base = _stable_seed(t.task_id)
         per_sample: list[dict] = []
         c = 0
         for s in range(n_samples):

@@ -12,6 +12,7 @@ from pathlib import Path
 from tqdm import tqdm
 
 from eval.fim_loaders import load_fim_tasks
+from eval.multi_turn import _stable_seed
 from eval.runner import Generator
 from eval.sandbox import execute
 
@@ -50,7 +51,7 @@ def main() -> int:
     final_pass = 0
     t0 = time.time()
     for t in tqdm(failed):
-        seed_base = abs(hash(t.task_id)) % 100_000
+        seed_base = _stable_seed(t.task_id)
         turns = []
         passed_now = False
         # turn 0 (greedy FIM) already failed -- it's why this task is in `failed`.
