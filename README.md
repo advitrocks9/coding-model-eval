@@ -27,7 +27,7 @@ JetBrains evaluates Mellum on FIM benchmarks (RepoBench, SAFIM, HumanEval-Infill
 |---|---:|---:|---:|
 | Mellum-4b-sft-python | 15.9% | 80.8% [78.3, 83.1] (n=1033) | **1.3% [0.6, 3.1]** |
 | Mellum-4b-dpo-python | 9.1% | 81.9% [79.4, 84.1] (n=1033) | - |
-| DS-Coder-1.3B-base | 25.0% | 16.3% [13.4, 19.7] (n=565, partial) | 22.0% [18.1, 26.4] |
+| DS-Coder-1.3B-base | 25.0% | 16.3% [13.5, 19.6] (n=565, partial) | 22.0% [18.1, 26.4] |
 | DS-Coder-1.3B-instruct | 54.9% | 3.7% [2.7, 5.0] (n=1033) | 52.6% [47.6, 57.6] |
 
 Same Mellum-DPO scores 9.1% on HumanEval+ and 81.9% on HumanEval-Infilling: 9x difference on the same model, picked apart by which benchmark you grade with. Post-trained Mellum vs DS-instruct on the same 1033 FIM tasks: 80.8% vs 3.7%, 22x ratio between two 1-4B-parameter families. The benchmark choice is doing more work than the model choice.
