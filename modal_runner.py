@@ -134,6 +134,19 @@ def run_regression_nohint(tag: str = "mellum_sft") -> dict:
     return _run("run_regression_nohint.py", tag)
 
 
+@app.function(image=image, gpu="A10G", timeout=7200, volumes={"/cache": hf_cache, "/repo/results": results_vol})
+def run_multiturn(tag: str = "mellum_sft") -> dict:
+    """Multi-turn hint pass. Requires {tag}_singleturn.jsonl in the volume.
+    Added after the stable-hash fix in 8478217 so the post-fix rerun is reproducible."""
+    return _run("run_multiturn.py", tag)
+
+
+@app.function(image=image, gpu="A10G", timeout=7200, volumes={"/cache": hf_cache, "/repo/results": results_vol})
+def run_multiturn_nohint(tag: str = "mellum_sft") -> dict:
+    """Multi-turn no-hint pass. Pairs with run_multiturn under the same per-task seed."""
+    return _run("run_multiturn_nohint.py", tag)
+
+
 @app.function(image=image, timeout=300, volumes={"/repo/results": results_vol})
 def fetch_results() -> dict:
     """Returns a manifest of every results file in the volume so we can rsync down."""

@@ -10,7 +10,7 @@ def main() -> int:
     by_id = {t.task_id: t for t in tasks}
     sample = [by_id["HumanEval/0"], by_id["HumanEval/3"], by_id["HumanEval/5"]]
 
-    g = Generator("/home/prannayk/models/mellum-sft-python")
+    g = Generator("JetBrains/Mellum-4b-sft-python")
     print("model loaded")
     for t in sample:
         r = run_one(t, g, max_extra_turns=2)

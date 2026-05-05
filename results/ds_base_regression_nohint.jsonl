@@ -1,9 +1,9 @@
 {"task_id": "HumanEval/0", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/2", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/3", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
-{"task_id": "HumanEval/4", "still_passes": false, "kind_after": "exception", "msg_after": "NameError: name 'statistics' is not defined. Did you forget to import 'statistics'?"}
+{"task_id": "HumanEval/4", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/7", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/8", "still_passes": false, "kind_after": "exception", "msg_after": "NameError: name 'reduce' is not defined"}
+{"task_id": "HumanEval/8", "still_passes": false, "kind_after": "exception", "msg_after": "NameError: name 'math' is not defined. Did you forget to import 'math'?"}
 {"task_id": "HumanEval/12", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/13", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/15", "still_passes": true, "kind_after": "ok", "msg_after": ""}
@@ -14,27 +14,27 @@
 {"task_id": "HumanEval/28", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/29", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/30", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/34", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/34", "still_passes": false, "kind_after": "exception", "msg_after": "IndexError: list index out of range"}
 {"task_id": "HumanEval/35", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/37", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
-{"task_id": "HumanEval/40", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
-{"task_id": "HumanEval/42", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/40", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/42", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
 {"task_id": "HumanEval/43", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
-{"task_id": "HumanEval/44", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
+{"task_id": "HumanEval/44", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/45", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/47", "still_passes": false, "kind_after": "assertion", "msg_after": "assert np.allclose(out, exp, rtol=1e-07, atol=atol)"}
+{"task_id": "HumanEval/47", "still_passes": false, "kind_after": "exception", "msg_after": "NameError: name 'statistics' is not defined. Did you forget to import 'statistics'?"}
 {"task_id": "HumanEval/48", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/49", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/50", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/53", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/54", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/57", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/58", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/57", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
+{"task_id": "HumanEval/58", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
 {"task_id": "HumanEval/62", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
-{"task_id": "HumanEval/66", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/68", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/79", "still_passes": true, "kind_after": "ok", "msg_after": ""}
-{"task_id": "HumanEval/80", "still_passes": true, "kind_after": "ok", "msg_after": ""}
+{"task_id": "HumanEval/66", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
+{"task_id": "HumanEval/68", "still_passes": false, "kind_after": "exception", "msg_after": "ValueError: min() iterable argument is empty"}
+{"task_id": "HumanEval/79", "still_passes": false, "kind_after": "assertion", "msg_after": "assert exact_match"}
+{"task_id": "HumanEval/80", "still_passes": false, "kind_after": "exception", "msg_after": "NameError: name 'i' is not defined. Did you mean: 'id'?"}
 {"task_id": "HumanEval/112", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/114", "still_passes": true, "kind_after": "ok", "msg_after": ""}
 {"task_id": "HumanEval/116", "still_passes": true, "kind_after": "ok", "msg_after": ""}

@@ -12,10 +12,10 @@ Pass@1 with Wilson 95% intervals. n=164 single-turn, 138 retries (Mellum-SFT fai
 |---|---:|---:|---:|---:|---:|
 | Mellum-4b-base (completion) | 24.4% [18.5, 31.5] | 21.3% [15.8, 28.2] | - | - | - |
 | Mellum-4b-base (FIM tokens) | 23.8% [17.9, 30.8] | 20.7% [15.2, 27.6] | - | - | - |
-| Mellum-4b-sft-python | 18.3% [13.1, 24.9] | 15.9% [11.1, 22.2] | 17.1% [12.1, 23.6] | **22.6% [16.7, 29.7]** | 8/26 = 30.8% [16.5, 50.0] |
-| Mellum-4b-dpo-python | 11.0% [7.1, 16.7] | 9.1% [5.6, 14.5] | 9.8% [6.1, 15.3] | - | 4/15 = 26.7% [10.9, 52.0] |
-| DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 28.0% [21.7, 35.4] | 37.2% [30.2, 44.7] | 1/41 = 2.4% [0.4, 12.6] |
-| DeepSeek-Coder-1.3B-instruct | 57.3% [49.7, 64.6] | 54.9% [47.2, 62.3] | 63.4% [55.8, 70.4] | 67.1% [59.6, 73.8] | 4/90 = 4.4% [1.7, 10.9] |
+| Mellum-4b-sft-python | 18.3% [13.1, 24.9] | 15.9% [11.1, 22.2] | 16.5% [11.6, 22.9] | **19.5% [14.2, 26.2]** | 10/26 = 38.5% [22.4, 57.5] |
+| Mellum-4b-dpo-python | 11.0% [7.1, 16.7] | 9.1% [5.6, 14.5] | 9.8% [6.1, 15.3] | - | 5/15 = 33.3% [15.2, 58.3] |
+| DeepSeek-Coder-1.3B-base | 29.3% [22.8, 36.6] | 25.0% [19.0, 32.1] | 26.2% [20.1, 33.4] | 32.9% [26.2, 40.4] | 14/41 = 34.1% [21.6, 49.5] |
+| DeepSeek-Coder-1.3B-instruct | 57.3% [49.7, 64.6] | 54.9% [47.2, 62.3] | 64.0% [56.4, 71.0] | 65.9% [58.3, 72.7] | 17/90 = 18.9% [12.1, 28.2] |
 
 Sandbox-correctness cross-check: I ran the official `evalplus.evaluate` CLI on the Mellum-SFT completions and on the DS-instruct completions in `results/`. Mellum-SFT matches exactly (18.3% / 15.9%). DS-instruct matches on base (57.3%) and disagrees on 2 of 164 plus tests in opposite directions: HumanEval/39 (I score plus-pass, EvalPlus scores plus-fail) and HumanEval/92 (the reverse). Net 54.9% me vs 54.3% theirs. Both crosscheck JSONs are committed at `results/_evalplus_crosscheck_*.json`.
 
@@ -55,8 +55,8 @@ For comparison, the same policy on HumanEval+ recovers 11/138 = 8.0%. Greedy-the
 |---|---:|---|
 | single-turn greedy | 15.9% | one greedy completion |
 | pass@3 sampled at T=0.6 | 18.3% | three independent samples, no retry mechanism |
-| multi-turn with hint (3 attempts) | 17.1% | greedy then up to 2 sampled retries with comment-block hint |
-| **multi-turn no hint (3 attempts)** | **22.6%** | greedy then up to 2 sampled retries, no hint, just resample |
+| multi-turn with hint (3 attempts) | 16.5% | greedy then up to 2 sampled retries with comment-block hint |
+| **multi-turn no hint (3 attempts)** | **19.5%** | greedy then up to 2 sampled retries, no hint, just resample |
 
 The pass@3 row was originally a 4-sample run reused under the unbiased estimator. The committed `results/mellum_sft_passk.jsonl` is `n_samples=4`, which is not actually compute-matched at 3 generations. `scripts/recompute_passk_at_3.py` reads that file, takes only samples [0:3] per task, and computes pass@3 via the codex unbiased estimator (`1 - C(n-c, k)/C(n, k)` at `n=3, k=3`); output at `results/mellum_sft_passk_at_3.jsonl`. The 18.3% in the table is that recomputed number, not the 4-sample original (18.8%).
 
@@ -90,30 +90,30 @@ The mechanism is in the per-turn outputs. Final-turn taxonomy across all 138 ret
 
 Appending `# def solution_v1: <old code> ... # try again below` *after* the prompt makes the model read the function as already finished and produce empty bodies. HumanEval/41 is the cleanest example: with the current hint, the model's final-turn output is literally `# return 0`, then `# Failed test: assert candidate(0) == 0`, then `# Fix the bug and try again.`, repeated. With no hint on the same task at the same seed, it tries an actual `math.floor` expression. The hint teaches a meta-pattern of commented-out attempt lines, and on retry the model continues that pattern instead of re-entering code.
 
-### Cross-family: regression rate is uniquely large on Mellum
+### Cross-family: three models cluster on regression, instruct is the outlier
 
 | | recovery (hint) | regression | net change at fixed budget |
 |---|---:|---:|---:|
-| Mellum-SFT | 1.4% | **30.8%** | hint costs 5.5 pp vs no-hint |
-| Mellum-DPO | 0.7% | 26.7% | - |
-| DS-Coder-base | 4.1% | 2.4% | hint costs 9.2 pp vs no-hint |
-| DS-Coder-instruct | **18.9%** | 4.4% | hint costs 3.7 pp vs no-hint |
+| Mellum-SFT | 0.7% | 38.5% | hint costs 3.0 pp vs no-hint |
+| Mellum-DPO | 0.7% | 33.3% | - |
+| DS-Coder-base | 1.6% | 34.1% | hint costs 6.7 pp vs no-hint |
+| DS-Coder-instruct | **20.3%** | 18.9% | hint costs 1.9 pp vs no-hint |
 
-Cross-family regression-rate comparisons use Fisher's two-sided exact test (each model's regression denominator is the tasks *that model* passes single-turn). Confirmatory family is the four cross-family Mellum-vs-DeepSeek contrasts, Holm-Bonferroni corrected: Mellum-SFT vs DS-instruct p_holm=0.003, Mellum-SFT vs DS-base p_holm=0.005, Mellum-DPO vs DS-instruct p_holm=0.028, Mellum-DPO vs DS-base p_holm=0.028. All four cross-family contrasts significant after correction. Within-family rates are statistically indistinguishable (Mellum-SFT vs DPO p=1.0; DS-base vs instruct p=1.0).
+Three of four models regress at 33-39%; DS-Coder-instruct is the lone low outlier at 18.9%. Cross-family Fisher's two-sided exact test, Holm-Bonferroni corrected: Mellum-SFT vs DS-instruct p_holm=0.250, Mellum-DPO vs DS-instruct p_holm=0.901, Mellum-SFT vs DS-base p_holm=1.000, Mellum-DPO vs DS-base p_holm=1.000. None of the four cross-family contrasts are significant after correction. Within-family the only suggestive split is DS-base vs DS-instruct (p=0.076 raw, not corrected). Within Mellum (SFT vs DPO) p=1.0.
 
-I had read the original Mellum-only result as "any 1-4B code model will be hint-poisoned." The DeepSeek run rejects that. The right reading: Mellum's SFT-on-Python corpus contains very few examples of comment blocks above functions that look like retry hints, so the model handles them by literal copying. DeepSeek's broader training mixes in enough such patterns that it treats them more like context.
+The previous version of this section published Mellum-SFT regression at 30.8% and DS-instruct at 4.4% from a run where the retry seed was `abs(hash(task_id))` -- Python's `hash()` is randomised per process, so each model's "regression" was sampled from one specific process-random retry path. With sha256-stable seeds (hint and no-hint use the same per-task seed) those numbers shift: DS-base 2.4 -> 34.1, DS-instruct 4.4 -> 18.9, Mellum-SFT 30.8 -> 38.5. I had read the original Mellum-only result as "Mellum's SFT corpus has no examples of commented retry attempts, so it copies them literally"; cross-family didn't reproduce. The right reading is "regression rate is high in general at this scale (~33-38%); instruction-tuning is the only thing that lowered it (DS-base 34.1 -> DS-instruct 18.9)."
 
 ![recovery vs regression](assets/recovery_vs_regression.png)
 
-Both with-hint Mellum points sit far below the y=x diagonal: their recovery is dwarfed by their regression rate. DS-base and DS-instruct sit above the diagonal in the lower-left. Mellum-SFT with no hint sits in the upper-left because there's no hint to break correct solutions.
+The plot was generated against the pre-fix numbers; the post-fix points cluster more tightly. The structural reading still holds for DS-instruct (high recovery, low-ish regression vs the other three) but the "Mellum below the diagonal, DS above" framing no longer survives.
 
 ## What "regression rate" actually measures
 
-The regression test fabricates a "previous attempt was wrong" hint on tasks the model already passes and reruns the retry loop. What it measures is **false-negative retry sensitivity**: P(correct -> broken | retry triggered). It's not "the cost the average user pays per retry": that's `regression_rate x P(retry-triggered-when-correct)`, and the second factor is deployment-specific (an IDE that auto-retries on every TODO comment is high; a user clicking Retry is low). Even with that caveat, 30.8% on Mellum-SFT is large.
+The regression test fabricates a "previous attempt was wrong" hint on tasks the model already passes and reruns the retry loop. What it measures is **false-negative retry sensitivity**: P(correct -> broken | retry triggered). It's not "the cost the average user pays per retry": that's `regression_rate x P(retry-triggered-when-correct)`, and the second factor is deployment-specific (an IDE that auto-retries on every TODO comment is high; a user clicking Retry is low). Even with that caveat, 33-39% on three of four models is large.
 
 The minimum reportable pair for any "multi-turn helps" claim should be the recovery rate paired with the false-negative retry sensitivity, plus an estimate of how often the deployed retry trigger fires on correct outputs. The published multi-turn pass@1 number reports only the first of those three.
 
-The no-hint regression control (`scripts/run_regression_nohint.py`) narrows the claim: most of what looked like hint-induced damage on the DeepSeek models is just stochastic retry damage on a from-scratch problem (sampled retry breaks 22-33% of correct answers in three of four models even with no hint). On Mellum-SFT the with-hint rate (30.8%) is actually slightly *above* the no-hint control (26.9%), so the hint isn't doing the stabilising work there that it does for DeepSeek. Two confounds I haven't fully addressed: (a) the with-hint regression uses greedy decoding while the no-hint control uses T=0.6 sampled, so this comparison still confounds prompt content with decoding mode; (b) the canonical-poisoning experiment (in `results/`, `*_canonical_poisoning.jsonl`) shows DS-base lifts +32 pp from seeing the canonical, so "hint as anchor" is the more conservative reading than "hint stabilises sampled retries."
+The numbers in the regression column are no-hint runs (`scripts/run_regression_nohint.py`): T=0.6 sampled retry on the same already-passing tasks, no comment-block hint. Pre-fix the no-hint regression looked low for the DeepSeek models (DS-base 2.4%, DS-instruct 4.4%); post-fix all three non-instruct models cluster at 33-38%, and the "hint hurts Mellum specifically" framing doesn't survive. Two confounds the rerun still doesn't address: (a) the rerun uses sampled decoding throughout, but the original with-hint regression that produced the 30.8% pre-fix Mellum number used greedy decoding -- I haven't redone that with-hint sampled vs greedy split; (b) the canonical-poisoning experiment (in `results/`, `*_canonical_poisoning.jsonl`) shows DS-base lifts +32 pp from seeing the canonical solution, so "hint as anchor" is the more conservative reading than "hint stabilises sampled retries."
 
 ## Why does the hint hurt
 
@@ -137,7 +137,7 @@ eval/report.py      Wilson CIs, codex-style pass@k, cross-table.
 scripts/run_*.py    one runner per experiment.
 scripts/analyze_hint_sweep.py  exact paired McNemar + Holm-Bonferroni.
 scripts/summary.py             one-command audit of every README claim.
-modal_runner.py     Modal entrypoints (local 4090 went down mid-project).
+modal_runner.py     Modal A10G entrypoints; the multi-turn sweeps don't fit on the 4090.
 results/            JSONL per (tag, experiment), one row per task.
 ```
 

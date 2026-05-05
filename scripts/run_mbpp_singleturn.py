@@ -12,7 +12,7 @@ from eval.mbpp_loader import load_mbpp_plus_tasks
 from eval.runner import Generator
 from eval.sandbox import execute
 
-DEFAULT_MODEL = "/home/prannayk/models/mellum-sft-python"
+DEFAULT_MODEL = "JetBrains/Mellum-4b-sft-python"
 DEFAULT_TAG = "mellum_sft"
 
 

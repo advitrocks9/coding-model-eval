@@ -9,7 +9,7 @@ from eval.loaders import load_tasks
 from eval.runner import Generator, build_retry_prompt
 from eval.sandbox import execute
 
-DEFAULT_MODEL = "/home/prannayk/models/mellum-sft-python"
+DEFAULT_MODEL = "JetBrains/Mellum-4b-sft-python"
 DEFAULT_TAG = "mellum_sft"
 FAKE_HINT = "expected output X, got Y (synthetic hint for the regression check)"
 

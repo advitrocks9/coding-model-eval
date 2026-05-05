@@ -16,7 +16,7 @@ from eval.multi_turn import _stable_seed
 from eval.runner import Generator
 from eval.sandbox import execute
 
-DEFAULT_MODEL = "/home/prannayk/models/mellum-sft-python"
+DEFAULT_MODEL = "JetBrains/Mellum-4b-sft-python"
 DEFAULT_TAG = "mellum_sft"
 DEFAULT_VARIANT = "single"
 RETRY_TEMPERATURE = 0.6

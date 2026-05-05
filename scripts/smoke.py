@@ -8,7 +8,7 @@ from eval.sandbox import execute
 def main() -> None:
     tasks = load_tasks()[:3]
     print(f"loading model on cuda...", flush=True)
-    g = Generator("/home/prannayk/models/mellum-sft-python", device="cuda")
+    g = Generator("JetBrains/Mellum-4b-sft-python", device="cuda")
     print("loaded\n", flush=True)
 
     for t in tasks:

@@ -11,7 +11,7 @@ from eval.loaders import load_tasks
 from eval.multi_turn import run_one
 from eval.runner import Generator
 
-DEFAULT_MODEL = "/home/prannayk/models/mellum-sft-python"
+DEFAULT_MODEL = "JetBrains/Mellum-4b-sft-python"
 DEFAULT_TAG = "mellum_sft"
 
 

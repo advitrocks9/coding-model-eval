@@ -11,7 +11,7 @@ from eval.fim_loaders import load_fim_tasks
 from eval.runner import Generator
 from eval.sandbox import execute
 
-DEFAULT_MODEL = "/home/prannayk/models/mellum-base"
+DEFAULT_MODEL = "JetBrains/Mellum-4b-base"
 DEFAULT_TAG = "mellum_base"
 DEFAULT_VARIANT = "single"
 
