@@ -1,8 +1,8 @@
 """
 Modal entrypoint for the eval pipeline. Runs the existing scripts/* on a
-cloud GPU because the local SSH-to-GPU box is offline. The repo contents
-are baked into the image; HuggingFace cache is a persistent volume so
-weights download once across runs.
+cloud GPU when the multi-turn sweeps don't fit on the 4090. The repo
+contents are baked into the image; HuggingFace cache is a persistent
+volume so weights download once across runs.
 
 Usage examples:
   uv tool run modal run modal_runner.py::sanity
